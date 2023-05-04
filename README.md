@@ -28,6 +28,7 @@ Cập nhật packages và thiết lập để cài đặt Docker từ kho lưu t
 sudo apt update
 sudo apt-cache policy docker-ce
     
+![update Package](https://azdigi.com/blog/wp-content/uploads/2022/05/CleanShot-2022-05-14-at-14.58.10.png)    
 Cài đặt Docker
   
 sudo apt install docker-ce -y
