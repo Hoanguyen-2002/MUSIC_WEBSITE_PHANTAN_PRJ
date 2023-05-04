@@ -58,17 +58,21 @@ docker build . -t <tên tag image>
 Để xem các image đã build
 
 docker image ls
+![](image_tutorial/342490521_217933580975154_883109246959707632_n.png)
 
 Để chạy image đã build 
 
 docker run -itd -p <Cổng của dự án expose ra>:<cổng ánh xạ đến container> <name:tag>
+![](image_tutorial/342713892_985541185939922_1262460989242421033_n.png)
 
 Để check container đang chạy 
 
 docker ps
+![](image_tutorial/344371889_247758604446759_341631157296807510_n.png)
 
 Để kiểm tra logs trong quá trình chạy container 
 
 docker logs <image ID>
+![](image_tutorial/342405361_176037032056786_2077710370705631803_n.png)
 
-<h2>2. Cài đặt và triển khai CI/CD</h2>
+<h2>2. Cài đặt và triển khai CI/CD sử dụng jenkin và docker</h2>
