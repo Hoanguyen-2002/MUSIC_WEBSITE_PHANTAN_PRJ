@@ -48,6 +48,7 @@ Bước 4: Sử dụng lệnh Docker để build container
 Để xem các thông tin về Docker
 
 docker info
+
 ![Check infor](https://azdigi.com/blog/wp-content/uploads/2022/05/CleanShot-2022-05-14-at-15.08.38.png)
     
 Build Docker image
