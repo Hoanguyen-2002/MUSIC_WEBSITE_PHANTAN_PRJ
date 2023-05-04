@@ -95,7 +95,7 @@ Build Docker image
 <h2>3. Cài đặt và triển khai CI/CD sử dụng jenkin và docker</h2>
 
 – Bước 1: [Manual] Khởi tạo repository và có branch default là main và dev. Cài đặt trên Gitlab 9.
-– Bước 2: [Manual] Trừ owner(Nguyễn Việt Hòa) ra, thì các coder sẽ push code tính năng lên branch dev
+– Bước 2: [Manual] Trừ owner(Nguyễn Việt Hòa) ra, thì các coder sẽ push code tính năng lên branch dev.
 – Bước 3: [Auto] Hệ thống tự động thực hiện test source code, nếu PASS thì sẽ deploy tự động (rsync) code lên server beta.
 – Bước 4: [Manual] Tester sẽ vào hệ thống beta để làm UAT (User Acceptance Testing) và confirm là mọi thứ OK.
 – Bước 5: [Manual] Coder hoặc owner sẽ vào tạo Merge Request, và merge từ branch dev sang branch master.
