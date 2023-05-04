@@ -32,10 +32,12 @@ sudo apt-cache policy docker-ce
 Cài đặt Docker
   
 sudo apt install docker-ce -y
+![setting Docker](https://azdigi.com/blog/wp-content/uploads/2022/05/CleanShot-2022-05-14-at-14.59.43.png) 
     
 Kiểm tra trạng thái của Docker
  
 sudo systemctl status docker
+![Check status docker](https://azdigi.com/blog/wp-content/uploads/2022/05/CleanShot-2022-05-14-at-15.00.28.png)
     
 Bước 3: Cấu hình quyền Sudo cho user sử dụng Docker
 Các Docker yêu cầu chỉ được thực thi với tư cách người dùng root theo mặc định. Do đó nếu các  sử dụng các user khác thì cần phải thêm user đó vào nhóm Docker thì mới có quyền thao tác.
@@ -46,10 +48,12 @@ Bước 4: Sử dụng lệnh Docker để build container
 Để xem các thông tin về Docker
 
 docker info
+![Check infor](https://azdigi.com/blog/wp-content/uploads/2022/05/CleanShot-2022-05-14-at-15.08.38.png)
     
 Build Docker image
   
 docker build . -t <tên tag image>
+![](image_tutorial/342354139_202118322584951_1834945296942003401_n.png)
 
 Để xem các image đã build
 
@@ -66,3 +70,5 @@ docker ps
 Để kiểm tra logs trong quá trình chạy container 
 
 docker logs <image ID>
+
+<h2>2. Cài đặt và triển khai CI/CD</h2>
