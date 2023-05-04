@@ -32,11 +32,13 @@ Cập nhật packages và thiết lập để cài đặt Docker từ kho lưu t
 Cài đặt Docker
   
 <h4>sudo apt install docker-ce -y</h4>
+
 ![setting Docker](https://azdigi.com/blog/wp-content/uploads/2022/05/CleanShot-2022-05-14-at-14.59.43.png) 
     
 Kiểm tra trạng thái của Docker
  
 <h4>sudo systemctl status docker</h4>
+
 ![Check status docker](https://azdigi.com/blog/wp-content/uploads/2022/05/CleanShot-2022-05-14-at-15.00.28.png)
     
 <h3>Bước 3: Cấu hình quyền Sudo cho user sử dụng Docker</h3>
