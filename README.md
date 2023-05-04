@@ -54,26 +54,31 @@ Các Docker yêu cầu chỉ được thực thi với tư cách người dùng 
 Build Docker image
   
 <h4>docker build . -t <tên tag image> </h4>
+
 ![](image_tutorial/342354139_202118322584951_1834945296942003401_n.png)
 
 Để xem các image đã build
 
 <h4>docker image ls</h4>
+
 ![](image_tutorial/342490521_217933580975154_883109246959707632_n.png)
 
 Để chạy image đã build 
 
 <h4>docker run -itd -p <Cổng của dự án expose ra>:<cổng ánh xạ đến container> <name:tag> </h4>
+
 ![](image_tutorial/342713892_985541185939922_1262460989242421033_n.png)
 
 Để check container đang chạy 
 
 <h4>docker ps</h4>
+
 ![](image_tutorial/344371889_247758604446759_341631157296807510_n.png)
 
 Để kiểm tra logs trong quá trình chạy container 
 
 <h4>docker logs <image ID></h4>
+
 ![](image_tutorial/342405361_176037032056786_2077710370705631803_n.png)
 
 <h2>2. Cài đặt và triển khai CI/CD sử dụng jenkin và docker</h2>
