@@ -55,7 +55,7 @@ Các Docker yêu cầu chỉ được thực thi với tư cách người dùng 
     
 Build Docker image
   
-<h4>docker build . -t <tên tag image> </h4>
+<h4>docker build . -t [tên tag image] </h4>
 
 ![](image_tutorial/342354139_202118322584951_1834945296942003401_n.png)
 
@@ -67,7 +67,7 @@ Build Docker image
 
 Để chạy image đã build 
 
-<h4>docker run -itd -p <Cổng của dự án expose ra>:<cổng ánh xạ đến container> <name:tag> </h4>
+<h4>docker run -itd -p [Cổng của dự án expose ra]:[cổng ánh xạ đến container] [name:tag] </h4>
 
 ![](image_tutorial/342713892_985541185939922_1262460989242421033_n.png)
 
@@ -82,5 +82,14 @@ Build Docker image
 <h4>docker logs <image ID></h4>
 
 ![](image_tutorial/342405361_176037032056786_2077710370705631803_n.png)
+
+
+<h2>2. Phân chia công việc</h2>
+
+1. Trần Quang Thắng
+2. Nguyễn Việt Hòa
+3. Vũ Đức Duy
+4. Bùi Trung Kiên
+5. Trần Văn Tài
 
 <h2>2. Cài đặt và triển khai CI/CD sử dụng jenkin và docker</h2>
