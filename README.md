@@ -100,20 +100,3 @@ Build Docker image
 – Bước 7: [Auto] Hệ thống sẽ tự động thực hiện test source code, nếu PASS sẽ enable tính năng cho phép deploy lên production server.
 – Bước 8: [Manual] Owner review là merge request OK, test OK. Tiến hành nhấn nút để deploy các thay đổi lên môi trường production.
 – Bước 9: [Manual] Tester sẽ vào hệ thống production để làm UAT và confirm mọi thứ OK. Nếu không OK, Owner có thể nhấn nút Deploy phiên bản master trước đó để rollback hệ thống về trạng thái stable trước đó.
-
-Chạy câu lệnh sau để tạo một container chứa Gitlab 9.
-<pre>
-docker run --detach \
---hostname code.teamcrop.com \
---publish 8080:80 --publish 2222:22 \
---name gitlab9 \
---restart=always \
---volume /gitlab9/config:/etc/gitlab \
---volume /gitlab9/logs:/var/log/gitlab \
---volume /gitlab9/data:/var/opt/gitlab \
-gitlab/gitlab-ce:9.0.3-ce.0
-</pre>
-
-Sử dụng image gitlab/gitlab-ce:9.0.3-ce.0. Có mount ra 3 thư mục bên ngoài máy ở thục mục /gitlab9 để lỡ có chuyện gì chỉ cần stop, remove container, khi chạy docker run lại thì không bị mất dữ liệu, source code. Câu lệnh trên có map 2 port là 8080 và 2222 tương ứng tới 2 port 80 và 22 trong container. Mapping port vậy bởi vì trên server dev này có rất nhiều service khác và đã chiếm port 80 và 22
-
-Sau khi start container thì có thể truy cập vào từ ip hoặc domain (mà đã trỏ DNS), ví dụ: http://code.teamcrop.com:8080 là có thể vào gitlab 9, tài khoản mặc định là `root`.
