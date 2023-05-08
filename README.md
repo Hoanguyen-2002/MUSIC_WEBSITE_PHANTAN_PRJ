@@ -1,6 +1,3 @@
-# Build and Deploy a Better Spotify 2.0 Clone Music App with React 18! (Tailwind, Shazam, Redux)
-![Spotify Clone](https://i.ibb.co/mFh2kGZ/Thumbnail-2.png)
-
 <h1>MUSIC WEBSITE</h1>
 <h2>1. Các bước chạy và cài đặt Docker trên hệ điều hành Ubuntu</h2>
 <h3>Bước 1: Cập nhật hệ thống</h3>
