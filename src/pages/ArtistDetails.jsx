@@ -32,4 +32,4 @@ const ArtistDetails = () => {
 };
 
 export default ArtistDetails;
-//check3
+//check jenkins
