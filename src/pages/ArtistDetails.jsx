@@ -30,6 +30,6 @@ const ArtistDetails = () => {
     </div>
   );
 };
-//Check jenkins status
+
 export default ArtistDetails;
-//check
+//check3
