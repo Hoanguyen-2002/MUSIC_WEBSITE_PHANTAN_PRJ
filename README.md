@@ -92,10 +92,10 @@ Build Docker image
 
 <body>
 <ul>– Bước 1: [Manual] Khởi tạo repository và có branch default là main và dev. Cài đặt trên Gitlab 9.</ul>
-<ul>– Bước 2: [Manual] Trừ owner(Nguyễn Việt Hòa) ra, thì các coder sẽ push code tính năng lên branch dev.</ul>>
+<ul>– Bước 2: [Manual] Trừ owner(Nguyễn Việt Hòa) ra, thì các coder sẽ push code tính năng lên branch dev.</ul>
 <ul>– Bước 3: [Auto] Hệ thống tự động thực hiện test source code, nếu PASS thì sẽ deploy tự động (rsync) code lên server beta.</ul>
 <ul>– Bước 4: [Manual] Tester sẽ vào hệ thống beta để làm UAT (User Acceptance Testing) và confirm là mọi thứ OK.</ul>
-<ul>– Bước 5: [Manual] Coder hoặc owner sẽ vào tạo Merge Request, và merge từ branch dev sang branch master.</ul>>
+<ul>– Bước 5: [Manual] Coder hoặc owner sẽ vào tạo Merge Request, và merge từ branch dev sang branch master.</ul>
 <ul>– Bước 6: [Manual] Owner sẽ accept merge request.</ul>
 <ul>– Bước 7: [Auto] Hệ thống sẽ tự động thực hiện test source code, nếu PASS sẽ enable tính năng cho phép deploy lên production server.</ul>
 <ul>– Bước 8: [Manual] Owner review là merge request OK, test OK. Tiến hành nhấn nút để deploy các thay đổi lên môi trường production.</ul>
