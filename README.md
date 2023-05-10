@@ -86,7 +86,7 @@ Build Docker image
 1. Trần Quang Thắng (tester and coder)
 2. Nguyễn Việt Hòa (owner and coder)
 3. Vũ Đức Duy (coder)
-4. Bùi Trung Kiên (coder and leader)
+4. Bùi Trung Kiên (coder and leader pro)
 
 <h2>3. Cài đặt và triển khai CI/CD sử dụng jenkin và docker</h2>
 
