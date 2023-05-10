@@ -89,7 +89,7 @@ Build Docker image
 3. Vũ Đức Duy (coder)
 4. Bùi Trung Kiên (coder and leader pro)
 
-<h2>3. Cài đặt và triển khai CI/CD sử dụng jenkin và docker</h2>
+<h2>3. Cài đặt và triển khai CI/CD sử dụng gitlab và docker</h2>
 
 <body>
 <ul>– Bước 1: [Manual] Khởi tạo repository và có branch default là main và dev. Cài đặt trên Gitlab 9.</ul>
