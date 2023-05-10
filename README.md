@@ -87,10 +87,10 @@ Build Docker image
 2. Nguyễn Việt Hòa (owner and coder)
 3. Vũ Đức Duy (coder)
 4. Bùi Trung Kiên (coder and leader)
-5. Trần Văn Tài (player)
 
 <h2>3. Cài đặt và triển khai CI/CD sử dụng jenkin và docker</h2>
 
+<body>
 – Bước 1: [Manual] Khởi tạo repository và có branch default là main và dev. Cài đặt trên Gitlab 9.
 – Bước 2: [Manual] Trừ owner(Nguyễn Việt Hòa) ra, thì các coder sẽ push code tính năng lên branch dev.
 – Bước 3: [Auto] Hệ thống tự động thực hiện test source code, nếu PASS thì sẽ deploy tự động (rsync) code lên server beta.
@@ -100,3 +100,4 @@ Build Docker image
 – Bước 7: [Auto] Hệ thống sẽ tự động thực hiện test source code, nếu PASS sẽ enable tính năng cho phép deploy lên production server.
 – Bước 8: [Manual] Owner review là merge request OK, test OK. Tiến hành nhấn nút để deploy các thay đổi lên môi trường production.
 – Bước 9: [Manual] Tester sẽ vào hệ thống production để làm UAT và confirm mọi thứ OK. Nếu không OK, Owner có thể nhấn nút Deploy phiên bản master trước đó để rollback hệ thống về trạng thái stable trước đó.
+</body>
