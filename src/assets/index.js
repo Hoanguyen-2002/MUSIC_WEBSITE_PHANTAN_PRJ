@@ -1,5 +1,5 @@
 import loader from './loader.svg';
-import logo from './music-library.svg';
+import logo from './new-logo.svg';
 
 export {
   logo,
