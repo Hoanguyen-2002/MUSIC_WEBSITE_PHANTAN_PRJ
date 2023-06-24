@@ -8,7 +8,6 @@ const accountModel = new Schema({
     access: String,
     phone: String,
     avatar: String,
-    address: String,
     createAt: { type: Date, default: Date.now },
     updateAt: { type: Date, default: Date.now },
 });
