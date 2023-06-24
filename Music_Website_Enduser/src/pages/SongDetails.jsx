@@ -14,7 +14,7 @@ const SongDetails = () => {
   const { data, isFetching: isFetchinRelatedSongs, error } = useGetSongRelatedQuery({ songid });
   const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery({ songid });
 
-  if (isFetchingSongDetails && isFetchinRelatedSongs) return <Loader title="Searching song details" />;
+  if (isFetchingSongDetails && isFetchinRelatedSongs) return <Loader title="Tìm kiếm chi tiết bài hát" />;
 
   console.log(songData);
 
@@ -45,7 +45,7 @@ const SongDetails = () => {
               <p key={`lyrics-${line}-${i}`} className="text-gray-400 text-base my-1">{line}</p>
             ))
             : (
-              <p className="text-gray-400 text-base my-1">Sorry, No lyrics found!</p>
+              <p className="text-gray-400 text-base my-1">Xin lỗi, không tìm thấy Lyrics!</p>
             )}
         </div>
       </div>
