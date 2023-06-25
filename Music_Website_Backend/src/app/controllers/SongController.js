@@ -47,16 +47,17 @@ class songController {
 
     addSong(req, res) {
         console.log(req.body);
-        const testCaseBody = req.body;
-        const newTestData = new testCaseModel({
-            patientID: String(testCaseBody?.patientID),
-            patientName: String(testCaseBody?.patientName),
-            testName: String(testCaseBody?.testName),
-            primaryTissue: String(testCaseBody?.primaryTissue),
+        const songData = req.body;
+        const newSong = new songModel({
+            id: String(songData?.id),
+            thumb: String(songData?.thumb),
+            artist: String(songData?.artist),
+            testName: String(songData?.testName),
+            primaryTissue: String(songData?.primaryTissue),
             avaliable: false,
         });
-        console.log(newTestData);
-        newTestData
+        console.log(newSong);
+        newSong
             .save()
             .then((test) => {
                 console.log('Added new test case to database:', test);

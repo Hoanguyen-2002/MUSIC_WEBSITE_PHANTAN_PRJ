@@ -43,6 +43,11 @@ export default [
         name: 'sub-page',
         component: './Admin',
       },
+      {
+        path: '/admin/add-song',
+        name: 'Thêm bài hát',
+        component: './Admin',
+      },
     ],
   },
   {
