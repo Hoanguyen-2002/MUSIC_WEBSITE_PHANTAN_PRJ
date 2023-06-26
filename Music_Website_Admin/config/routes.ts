@@ -31,14 +31,20 @@ export default [
   {
     path: '/user-manager',
     name: 'Quản lý người dùng',
-    icon: 'UserOutlined',
+    icon: '👤',
     component: './UserManager',
   },
   {
     path: '/artist-manager',
     name: 'Quản lý ca sĩ',
-    icon: 'UserOutlined',
+    icon: '👩🏿‍🎤',
     component: './ArtistManager',
+  },
+  {
+    path: '/song-manager',
+    name: 'Quản lý bài hát',
+    icon: '🎶',
+    component: './SongManager',
   },
   {
     path: '/admin',
