@@ -1,5 +1,5 @@
-import React from 'react';
-import { Space, Table, Tag } from 'antd';
+import React, { useState } from 'react';
+import { Space, Table, Tag, Input } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
@@ -7,6 +7,8 @@ interface DataType {
   name: string;
   access: string;
 }
+
+const { Search } = Input;
 
 const columns: ColumnsType<DataType> = [
   {
@@ -55,6 +57,23 @@ const data: DataType[] = [
   },
 ];
 
-const UserManager: React.FC = () => <Table columns={columns} dataSource={data} />;
+const UserManager: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredData = data.filter((item) => {
+    return item.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  return (
+    <>
+      <Search placeholder="Search User" onChange={handleSearch} style={{ marginBottom: 16 }} />
+      <Table columns={columns} dataSource={filteredData} />
+    </>
+  );
+};
 
 export default UserManager;
