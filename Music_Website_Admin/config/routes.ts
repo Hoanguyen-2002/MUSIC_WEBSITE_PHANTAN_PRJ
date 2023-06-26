@@ -29,6 +29,24 @@ export default [
     component: './Welcome',
   },
   {
+    path: '/user-manager',
+    name: 'Quản lý người dùng',
+    icon: '👤',
+    component: './UserManager',
+  },
+  {
+    path: '/artist-manager',
+    name: 'Quản lý ca sĩ',
+    icon: '👩🏿‍🎤',
+    component: './ArtistManager',
+  },
+  {
+    path: '/song-manager',
+    name: 'Quản lý bài hát',
+    icon: '🎶',
+    component: './SongManager',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
