@@ -35,6 +35,12 @@ export default [
     component: './UserManager',
   },
   {
+    path: '/artist-manager',
+    name: 'Quản lý ca sĩ',
+    icon: 'UserOutlined',
+    component: './ArtistManager',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
