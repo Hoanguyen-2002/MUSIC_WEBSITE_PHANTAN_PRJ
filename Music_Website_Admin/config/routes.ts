@@ -29,6 +29,12 @@ export default [
     component: './Welcome',
   },
   {
+    path: '/user-manager',
+    name: 'Quản lý người dùng',
+    icon: 'UserOutlined',
+    component: './UserManager',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
