@@ -46,7 +46,7 @@ export default [
       {
         path: '/user/add-user',
         name: 'Thêm người dùng',
-        component: './SongAdd',
+        component: './UserAdd',
       },
     ],
   },
@@ -68,7 +68,7 @@ export default [
       {
         path: '/artist/add-artist',
         name: 'Thêm ca sĩ',
-        component: './SongAdd',
+        component: './ArtistAdd',
       },
     ],
   },
