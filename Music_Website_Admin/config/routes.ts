@@ -59,12 +59,12 @@ export default [
       {
         path: '/song/song-manager',
         name: 'Quản lý bài hát',
-        component: './Admin',
+        component: './SongManager',
       },
       {
         path: '/song/add-song',
         name: 'Thêm bài hát',
-        component: './Admin',
+        component: './SongAdd',
       },
     ],
   },

@@ -5,7 +5,9 @@ import type { ColumnsType } from 'antd/es/table';
 interface DataType {
   key: string;
   name: string;
-  access: string;
+  artist: string;
+  block: string;
+  gerne: string;
 }
 
 const { Search } = Input;
@@ -23,9 +25,20 @@ const columns: ColumnsType<DataType> = [
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Access',
-    dataIndex: 'access',
-    key: 'access',
+    title: 'Artist',
+    dataIndex: 'artist',
+    key: 'artist',
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: 'Block',
+    dataIndex: 'block',
+    key: 'block',
+  },
+  {
+    title: 'Gerne',
+    dataIndex: 'gerne',
+    key: 'gerne',
   },
   {
     title: 'Action',
@@ -42,23 +55,31 @@ const columns: ColumnsType<DataType> = [
 const data: DataType[] = [
   {
     key: '1',
-    name: 'Vu Duc Duy',
-    access: '1',
+    name: 'Smells like teen spirit',
+    artist: 'Nirvana',
+    block: 'rock',
+    gerne: 'grunge',
   },
   {
     key: '2',
-    name: 'Tran Quang Thang',
-    access: '1',
+    name: 'People help the people',
+    artist: 'Birdy',
+    block: 'rock',
+    gerne: 'indie rock',
   },
   {
     key: '3',
-    name: 'Nguyen Viet Hoa',
-    access: '1',
+    name: 'Heather',
+    artist: 'Connan Gray',
+    block: 'pop',
+    gerne: 'folk',
   },
   {
     key: '4',
-    name: 'Bui Trung Kien',
-    access: '1',
+    name: 'Come as you are',
+    artist: 'Nirvana',
+    block: 'rock',
+    gerne: 'grunge',
   },
 ];
 
@@ -72,8 +93,10 @@ const UserManager: React.FC = () => {
   const filteredData = data.filter((item) => {
     return (
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ||  item.access.toLowerCase().includes(searchTerm.toLowerCase())
-      ||  item.key.toLowerCase().includes(searchTerm.toLowerCase()));
+      ||  item.key.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.artist.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.block.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.gerne.toLowerCase().includes(searchTerm.toLowerCase()))
   });
 
   return (
