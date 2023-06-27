@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
+import { Space, Table, Tag, Input, Button, Modal } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
@@ -47,7 +47,7 @@ const columns: ColumnsType<DataType> = [
     render: (_, record) => (
       <Space size="middle">
         <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
-        <Button type="danger" onClick={() => showDeleteConfirm(record)}>Delete</Button>
+        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Delete</Button>
       </Space>
     ),
   },
@@ -84,33 +84,16 @@ const data: DataType[] = [
   },
 ];
 
-const UserManager: React.FC = () => {
+const SongManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [editingRecord, setEditingRecord] = useState<DataType | null>(null);
-  const [editForm] = Form.useForm();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
   const handleEdit = (record: DataType) => {
-    setEditingRecord(record);
-    editForm.setFieldsValue(record);
-  };
-
-  const handleSave = () => {
-    editForm.validateFields().then((values) => {
-      const updatedRecord = { ...editingRecord, ...values };
-      console.log("Updated record:", updatedRecord);
-      // TODO: Update the data source with the updated record
-      setEditingRecord(null);
-      editForm.resetFields();
-    });
-  };
-
-  const handleCancel = () => {
-    setEditingRecord(null);
-    editForm.resetFields();
+    // Open the edit form for the corresponding record
+    console.log(`Editing record with key ${record.key}`);
   };
 
   const handleDelete = (key: string) => {
@@ -145,34 +128,10 @@ const UserManager: React.FC = () => {
 
   return (
     <>
-      <Search placeholder="Search Singer" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
+      <Search placeholder="Search Song" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
       <Table columns={columns} dataSource={filteredData} />
-      <Modal
-        title="Edit Record"
-        visible={!!editingRecord}
-        onOk={handleSave}
-        onCancel={handleCancel}
-      >
-        <Form form={editForm} layout="vertical">
-          <Form.Item name="key" label="Key">
-            <Input            disabled={true} />
-          </Form.Item>
-          <Form.Item name="name" label="Name" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="artist" label="Artist" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="block" label="Block" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="gerne" label="Gerne" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-        </Form>
-      </Modal>
     </>
   );
 };
 
-export default UserManager;
+export default SongManager;

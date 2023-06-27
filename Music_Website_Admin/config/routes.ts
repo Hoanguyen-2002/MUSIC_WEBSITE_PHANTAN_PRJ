@@ -29,22 +29,32 @@ export default [
     component: './Welcome',
   },
   {
-    path: '/user-manager',
-    name: 'Quản lý người dùng',
+    path: '/user',
+    name: 'Người dùng',
     icon: '👤',
-    component: './UserManager',
+    //access: 'canAdmin',
+    routes: [
+      {
+        path: '/user',
+        redirect: '/user/sub-page',
+      },
+      {
+        path: '/user/user-manager',
+        name: 'Quản lý người dùng',
+        component: './UserManager',
+      },
+      {
+        path: '/user/add-user',
+        name: 'Thêm người dùng',
+        component: './SongAdd',
+      },
+    ],
   },
   {
     path: '/artist-manager',
     name: 'Quản lý ca sĩ',
     icon: '👩🏿‍🎤',
     component: './ArtistManager',
-  },
-  {
-    path: '/song-manager',
-    name: 'Quản lý bài hát',
-    icon: '🎶',
-    component: './SongManager',
   },
   {
     path: '/song',

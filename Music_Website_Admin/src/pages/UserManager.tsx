@@ -1,5 +1,5 @@
-import React from 'react';
-import { Space, Table, Tag } from 'antd';
+import React, { useState } from 'react';
+import { Space, Table, Tag, Input, Button, Modal } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
@@ -10,6 +10,9 @@ interface DataType {
   access: string;
   phone: string;
 }
+
+const { Search } = Input;
+const { confirm } = Modal;
 
 const columns: ColumnsType<DataType> = [
   {
@@ -43,8 +46,8 @@ const columns: ColumnsType<DataType> = [
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
+        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Delete</Button>
       </Space>
     ),
   },
@@ -85,6 +88,55 @@ const data: DataType[] = [
   },
 ];
 
-const UserManager: React.FC = () => <Table columns={columns} dataSource={data} />;
+const UserManager: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleEdit = (record: DataType) => {
+    // Open the edit form for the corresponding record
+    console.log(`Editing record with key ${record.key}`);
+  };
+
+  const handleDelete = (key: string) => {
+    // Delete the corresponding record
+    console.log(`Deleting record with key ${key}`);
+  };
+
+  const showDeleteConfirm = (record: DataType) => {
+    confirm({
+      title: `Are you sure you want to delete ${record.name}?`,
+      icon: <ExclamationCircleOutlined />,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        handleDelete(record.key);
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
+
+  const filteredData = data.filter((item) => {
+    return (
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.key.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.email.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.password.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.access.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.phone.toLowerCase().includes(searchTerm.toLowerCase()))
+  });
+
+  return (
+    <>
+      <Search placeholder="Search Song" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
+      <Table columns={columns} dataSource={filteredData} />
+    </>
+  );
+};
 
 export default UserManager;
