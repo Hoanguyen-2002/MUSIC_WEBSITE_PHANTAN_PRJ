@@ -1,103 +1,60 @@
-import React, { useState } from "react";
+import React from 'react';
+import { Button, Form, Input } from 'antd';
+import type { FormInstance } from 'antd/es/form';
 
-type SongData = {
-  key: string;
-  name: string;
-  artist: string;
-  block: string;
-  gerne: string;
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
 };
 
-type SongFormProps = {
-  onSubmit: (song: SongData) => void;
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
 };
 
-const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState<SongData>({
-    key: "",
-    name: "",
-    artist: "",
-    block: "",
-    gerne: "",
-  });
+const SongAdd: React.FC = () => {
+  const formRef = React.useRef<FormInstance>(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onSubmit(formData);
-    setFormData({
-      key: "",
-      name: "",
-      artist: "",
-      block: "",
-      gerne: "",
-    });
+  const onFinish = (values: any) => {
+    console.log(values);
+  };
+
+  const onReset = () => {
+    formRef.current?.resetFields();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="key">Key:</label>
-        <input
-          type="text"
-          id="key"
-          value={formData.key}
-          onChange={(event) =>
-            setFormData({ ...formData, key: event.target.value })
-          }
-          style={{ marginBottom: 20}}
-        />
-      </div>
-      <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          value={formData.name}
-          onChange={(event) =>
-            setFormData({ ...formData, name: event.target.value })
-          }
-          style={{ marginBottom: 20}}
-        />
-      </div>
-      <div>
-        <label htmlFor="artist">Artist:</label>
-        <input
-          type="text"
-          id="artist"
-          value={formData.artist}
-          onChange={(event) =>
-            setFormData({ ...formData, artist: event.target.value })
-          }
-          style={{ marginBottom: 20}}
-        />
-      </div>
-      <div>
-        <label htmlFor="block">Block:</label>
-        <input
-          type="text"
-          id="block"
-          value={formData.block}
-          onChange={(event) =>
-            setFormData({ ...formData, block: event.target.value })
-          }
-          style={{ marginBottom: 20}}
-        />
-      </div>
-      <div>
-        <label htmlFor="gerne" style={{ marginRight: 10, display: "block", fontWeight: "bold" }}>Genre:</label>
-        <input
-          type="text"
-          id="gerne"
-          value={formData.gerne}
-          onChange={(event) =>
-            setFormData({ ...formData, gerne: event.target.value })
-          }
-          style={{ marginBottom: 20,}}
-        />
-      </div>
-      <button type="submit">Add Song</button>
-    </form>
+    <Form
+      {...layout}
+      ref={formRef}
+      name="control-ref"
+      onFinish={onFinish}
+      style={{ maxWidth: 600 }}
+    >
+      <Form.Item name="key" label="Key" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="artist" label="Artist" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="block" label="Block" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="gerne" label="Gerne" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item {...tailLayout}>
+        <Button type="primary" style={{marginLeft: 100}} htmlType="submit">
+          Submit
+        </Button>
+        <Button htmlType="button" style={{marginLeft: 16}} onClick={onReset}>
+          Reset
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 
-export default SongForm;
+export default SongAdd;
