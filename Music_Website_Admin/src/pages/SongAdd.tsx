@@ -1,45 +1,98 @@
-import { HeartTwoTone, SmileTwoTone } from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-components';
-import { useIntl } from '@umijs/max';
-import { Alert, Card, Typography } from 'antd';
-import React from 'react';
+import React, { useState } from "react";
 
-const Admin: React.FC = () => {
-  const intl = useIntl();
+type SongData = {
+  key: string;
+  name: string;
+  artist: string;
+  block: string;
+  gerne: string;
+};
+
+type SongFormProps = {
+  onSubmit: (song: SongData) => void;
+};
+
+const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
+  const [formData, setFormData] = useState<SongData>({
+    key: "",
+    name: "",
+    artist: "",
+    block: "",
+    gerne: "",
+  });
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSubmit(formData);
+    setFormData({
+      key: "",
+      name: "",
+      artist: "",
+      block: "",
+      gerne: "",
+    });
+  };
+
   return (
-    <PageContainer
-      content={intl.formatMessage({
-        id: 'pages.admin.subPage.title',
-        defaultMessage: 'This page can only be viewed by admin',
-      })}
-    >
-      <Card>
-        <Alert
-          message={intl.formatMessage({
-            id: 'pages.welcome.alertMessage',
-            defaultMessage: 'Faster and stronger heavy-duty components have been released.',
-          })}
-          type="success"
-          showIcon
-          banner
-          style={{
-            margin: -12,
-            marginBottom: 48,
-          }}
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="key">Key:</label>
+        <input
+          type="text"
+          id="key"
+          value={formData.key}
+          onChange={(event) =>
+            setFormData({ ...formData, key: event.target.value })
+          }
         />
-        <Typography.Title level={2} style={{ textAlign: 'center' }}>
-          <SmileTwoTone /> Ant Design Pro <HeartTwoTone twoToneColor="#eb2f96" /> You
-        </Typography.Title>
-      </Card>
-      <p style={{ textAlign: 'center', marginTop: 24 }}>
-        Want to add more pages? Please refer to{' '}
-        <a href="https://pro.ant.design/docs/block-cn" target="_blank" rel="noopener noreferrer">
-          use block
-        </a>
-        。
-      </p>
-    </PageContainer>
+      </div>
+      <div>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          value={formData.name}
+          onChange={(event) =>
+            setFormData({ ...formData, name: event.target.value })
+          }
+        />
+      </div>
+      <div>
+        <label htmlFor="artist">Artist:</label>
+        <input
+          type="text"
+          id="artist"
+          value={formData.artist}
+          onChange={(event) =>
+            setFormData({ ...formData, artist: event.target.value })
+          }
+        />
+      </div>
+      <div>
+        <label htmlFor="block">Block:</label>
+        <input
+          type="text"
+          id="block"
+          value={formData.block}
+          onChange={(event) =>
+            setFormData({ ...formData, block: event.target.value })
+          }
+        />
+      </div>
+      <div>
+        <label htmlFor="gerne">Genre:</label>
+        <input
+          type="text"
+          id="gerne"
+          value={formData.gerne}
+          onChange={(event) =>
+            setFormData({ ...formData, gerne: event.target.value })
+          }
+        />
+      </div>
+      <button type="submit">Add Song</button>
+    </form>
   );
 };
 
-export default Admin;
+export default SongForm;
