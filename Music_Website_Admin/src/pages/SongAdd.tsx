@@ -44,6 +44,7 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
           onChange={(event) =>
             setFormData({ ...formData, key: event.target.value })
           }
+          style={{ marginBottom: 20}}
         />
       </div>
       <div>
@@ -55,6 +56,7 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
           onChange={(event) =>
             setFormData({ ...formData, name: event.target.value })
           }
+          style={{ marginBottom: 20}}
         />
       </div>
       <div>
@@ -66,6 +68,7 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
           onChange={(event) =>
             setFormData({ ...formData, artist: event.target.value })
           }
+          style={{ marginBottom: 20}}
         />
       </div>
       <div>
@@ -77,10 +80,11 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
           onChange={(event) =>
             setFormData({ ...formData, block: event.target.value })
           }
+          style={{ marginBottom: 20}}
         />
       </div>
       <div>
-        <label htmlFor="gerne">Genre:</label>
+        <label htmlFor="gerne" style={{ marginRight: 10, display: "block", fontWeight: "bold" }}>Genre:</label>
         <input
           type="text"
           id="gerne"
@@ -88,6 +92,7 @@ const SongForm: React.FC<SongFormProps> = ({ onSubmit }) => {
           onChange={(event) =>
             setFormData({ ...formData, gerne: event.target.value })
           }
+          style={{ marginBottom: 20,}}
         />
       </div>
       <button type="submit">Add Song</button>

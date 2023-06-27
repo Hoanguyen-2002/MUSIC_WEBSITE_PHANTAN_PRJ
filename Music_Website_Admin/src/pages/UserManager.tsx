@@ -133,7 +133,7 @@ const UserManager: React.FC = () => {
 
   return (
     <>
-      <Search placeholder="Search Song" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
+      <Search placeholder="Search User" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
       <Table columns={columns} dataSource={filteredData} />
     </>
   );

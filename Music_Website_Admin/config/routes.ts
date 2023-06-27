@@ -51,10 +51,26 @@ export default [
     ],
   },
   {
-    path: '/artist-manager',
-    name: 'Quản lý ca sĩ',
+    path: '/artist',
+    name: 'Ca Sĩ',
     icon: '👩🏿‍🎤',
-    component: './ArtistManager',
+    //access: 'canAdmin',
+    routes: [
+      {
+        path: '/artist',
+        redirect: '/artist/sub-page',
+      },
+      {
+        path: '/artist/artist-manager',
+        name: 'Quản lý ca sĩ',
+        component: './ArtistManager',
+      },
+      {
+        path: '/artist/add-artist',
+        name: 'Thêm ca sĩ',
+        component: './SongAdd',
+      },
+    ],
   },
   {
     path: '/song',
