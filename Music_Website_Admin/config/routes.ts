@@ -47,22 +47,22 @@ export default [
     component: './SongManager',
   },
   {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
+    path: '/song',
+    name: 'Bài hát',
+    icon: '🎶',
+    //access: 'canAdmin',
     routes: [
       {
-        path: '/admin',
-        redirect: '/admin/sub-page',
+        path: '/song',
+        redirect: '/song/sub-page',
       },
       {
-        path: '/admin/sub-page',
-        name: 'sub-page',
+        path: '/song/song-manager',
+        name: 'Quản lý bài hát',
         component: './Admin',
       },
       {
-        path: '/admin/add-song',
+        path: '/song/add-song',
         name: 'Thêm bài hát',
         component: './Admin',
       },

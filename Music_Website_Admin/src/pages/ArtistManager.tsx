@@ -12,6 +12,11 @@ const { Search } = Input;
 
 const columns: ColumnsType<DataType> = [
   {
+    title: 'Key',
+    dataIndex: 'key',
+    key: 'key',
+  },
+  {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
@@ -65,12 +70,15 @@ const UserManager: React.FC = () => {
   };
 
   const filteredData = data.filter((item) => {
-    return item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return (
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.access.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.key.toLowerCase().includes(searchTerm.toLowerCase()));
   });
 
   return (
     <>
-      <Search placeholder="Search User" onChange={handleSearch} style={{ marginBottom: 16 }} />
+      <Search placeholder="Search Singer" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
       <Table columns={columns} dataSource={filteredData} />
     </>
   );
