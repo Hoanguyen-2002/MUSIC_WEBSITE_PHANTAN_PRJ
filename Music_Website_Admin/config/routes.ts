@@ -29,42 +29,68 @@ export default [
     component: './Admin',
   },
   {
-    path: '/user-manager',
-    name: 'Quản lý người dùng',
+    path: '/user',
+    name: 'Người dùng',
     icon: '👤',
-    component: './UserManager',
-  },
-  {
-    path: '/artist-manager',
-    name: 'Quản lý ca sĩ',
-    icon: '👩🏿‍🎤',
-    component: './ArtistManager',
-  },
-  {
-    path: '/song-manager',
-    name: 'Quản lý bài hát',
-    icon: '🎶',
-    component: './SongManager',
-  },
-  {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
+    //access: 'canAdmin',
     routes: [
       {
-        path: '/admin',
-        redirect: '/admin/sub-page',
+        path: '/user',
+        redirect: '/user/sub-page',
       },
       {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        component: './Admin',
+        path: '/user/user-manager',
+        name: 'Quản lý người dùng',
+        component: './UserManager',
       },
       {
-        path: '/admin/add-song',
+        path: '/user/add-user',
+        name: 'Thêm người dùng',
+        component: './UserAdd',
+      },
+    ],
+  },
+  {
+    path: '/artist',
+    name: 'Ca Sĩ',
+    icon: '👩🏿‍🎤',
+    //access: 'canAdmin',
+    routes: [
+      {
+        path: '/artist',
+        redirect: '/artist/sub-page',
+      },
+      {
+        path: '/artist/artist-manager',
+        name: 'Quản lý ca sĩ',
+        component: './ArtistManager',
+      },
+      {
+        path: '/artist/add-artist',
+        name: 'Thêm ca sĩ',
+        component: './ArtistAdd',
+      },
+    ],
+  },
+  {
+    path: '/song',
+    name: 'Bài hát',
+    icon: '🎶',
+    //access: 'canAdmin',
+    routes: [
+      {
+        path: '/song',
+        redirect: '/song/sub-page',
+      },
+      {
+        path: '/song/song-manager',
+        name: 'Quản lý bài hát',
+        component: './SongManager',
+      },
+      {
+        path: '/song/add-song',
         name: 'Thêm bài hát',
-        component: './Admin',
+        component: './SongAdd',
       },
     ],
   },

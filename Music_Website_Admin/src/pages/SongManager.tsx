@@ -1,17 +1,24 @@
-import React from 'react';
-import { Space, Table, Tag } from 'antd';
+import React, { useState } from 'react';
+import { Space, Table, Tag, Input, Button, Modal } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
   key: string;
   name: string;
-  email: string;
-  password: string;
-  access: string;
-  phone: string;
+  artist: string;
+  block: string;
+  gerne: string;
 }
 
+const { Search } = Input;
+const { confirm } = Modal;
+
 const columns: ColumnsType<DataType> = [
+  {
+    title: 'Key',
+    dataIndex: 'key',
+    key: 'key',
+  },
   {
     title: 'Name',
     dataIndex: 'name',
@@ -19,32 +26,28 @@ const columns: ColumnsType<DataType> = [
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
-    key: 'email',
+    title: 'Artist',
+    dataIndex: 'artist',
+    key: 'artist',
+    render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Password',
-    dataIndex: 'password',
-    key: 'password',
+    title: 'Block',
+    dataIndex: 'block',
+    key: 'block',
   },
   {
-    title: 'Access',
-    dataIndex: 'access',
-    key: 'access',
-  },
-  {
-    title: 'Phone',
-    dataIndex: 'phone',
-    key: 'phone',
+    title: 'Gerne',
+    dataIndex: 'gerne',
+    key: 'gerne',
   },
   {
     title: 'Action',
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
+        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Delete</Button>
       </Space>
     ),
   },
@@ -53,38 +56,82 @@ const columns: ColumnsType<DataType> = [
 const data: DataType[] = [
   {
     key: '1',
-    name: 'Vu Duc Duy',
-    email: 'duy.vd207668@sis.hust.edu.vn',
-    password: '123',
-    access: '1',
-    phone: '0912345123'
+    name: 'Smells like teen spirit',
+    artist: 'Nirvana',
+    block: 'rock',
+    gerne: 'grunge',
   },
   {
     key: '2',
-    name: 'Tran Quang Thang',
-    email: 'thang.tq207701@sis.hust.edu.vn',
-    password: '123',
-    access: '1',
-    phone: '0965287395'
+    name: 'People help the people',
+    artist: 'Birdy',
+    block: 'rock',
+    gerne: 'indie rock',
   },
   {
     key: '3',
-    name: 'Nguyen Viet Hoa',
-    email: 'hoa.nv207673@sis.hust.edu.vn',
-    password: '123',
-    access: '1',
-    phone: '0917822851',
+    name: 'Heather',
+    artist: 'Connan Gray',
+    block: 'pop',
+    gerne: 'folk',
   },
   {
     key: '4',
-    name: 'Bui Trung Kien',
-    email: 'kien.bt207710@sis.hust.edu.vn',
-    password: '123',
-    access: '1',
-    phone: '0911198640',
+    name: 'Come as you are',
+    artist: 'Nirvana',
+    block: 'rock',
+    gerne: 'grunge',
   },
 ];
 
-const UserManager: React.FC = () => <Table columns={columns} dataSource={data} />;
+const SongManager: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState("");
 
-export default UserManager;
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleEdit = (record: DataType) => {
+    // Open the edit form for the corresponding record
+    console.log(`Editing record with key ${record.key}`);
+  };
+
+  const handleDelete = (key: string) => {
+    // Delete the corresponding record
+    console.log(`Deleting record with key ${key}`);
+  };
+
+  const showDeleteConfirm = (record: DataType) => {
+    confirm({
+      title: `Are you sure you want to delete ${record.name}?`,
+      icon: <ExclamationCircleOutlined />,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        handleDelete(record.key);
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
+
+  const filteredData = data.filter((item) => {
+    return (
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.key.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.artist.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.block.toLowerCase().includes(searchTerm.toLowerCase())
+      ||  item.gerne.toLowerCase().includes(searchTerm.toLowerCase()))
+  });
+
+  return (
+    <>
+      <Search placeholder="Search Song" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
+      <Table columns={columns} dataSource={filteredData} />
+    </>
+  );
+};
+
+export default SongManager;
