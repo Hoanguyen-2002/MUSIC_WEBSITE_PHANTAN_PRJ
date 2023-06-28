@@ -51,10 +51,14 @@ class songController {
         const newSong = new songModel({
             id: String(songData?.id),
             thumb: String(songData?.thumb),
+            artistIds: String(songData?.artistIds),
             artist: String(songData?.artist),
-            testName: String(songData?.testName),
-            primaryTissue: String(songData?.primaryTissue),
-            avaliable: false,
+            duration: String(songData?.duration),
+            block: String(songData?.block),
+            hasVideo: String(songData?.hasVideo),
+            videoLink: String(songData?.videoLink),
+            name: String(songData?.name),
+            genre: String(songData?.genre),
         });
         console.log(newSong);
         newSong
