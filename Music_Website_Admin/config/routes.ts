@@ -26,13 +26,13 @@ export default [
     path: '/welcome',
     name: 'welcome',
     icon: 'smile',
-    component: './Admin',
+    component: './Welcome',
   },
   {
     path: '/user',
     name: 'Người dùng',
     icon: '👤',
-    //access: 'canAdmin',
+    access: 'canAdmin',
     routes: [
       {
         path: '/user',
@@ -54,7 +54,7 @@ export default [
     path: '/artist',
     name: 'Ca Sĩ',
     icon: '👩🏿‍🎤',
-    //access: 'canAdmin',
+    access: 'canAdmin',
     routes: [
       {
         path: '/artist',
@@ -73,26 +73,10 @@ export default [
     ],
   },
   {
-    path: '/song',
-    name: 'Bài hát',
+    path: '/song-manager',
+    name: 'Quản lý bài hát',
     icon: '🎶',
-    //access: 'canAdmin',
-    routes: [
-      {
-        path: '/song',
-        redirect: '/song/sub-page',
-      },
-      {
-        path: '/song/song-manager',
-        name: 'Quản lý bài hát',
-        component: './SongManager',
-      },
-      {
-        path: '/song/add-song',
-        name: 'Thêm bài hát',
-        component: './SongAdd',
-      },
-    ],
+    component: './SongManager',
   },
   {
     name: 'list.table-list',

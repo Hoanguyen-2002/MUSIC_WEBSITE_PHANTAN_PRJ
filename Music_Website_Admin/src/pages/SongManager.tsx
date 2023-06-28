@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Space, Table, Tag, Input, Button, Modal } from 'antd';
+import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
@@ -84,6 +84,15 @@ const data: DataType[] = [
   },
 ];
 
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
+
 const SongManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -126,9 +135,57 @@ const SongManager: React.FC = () => {
       ||  item.gerne.toLowerCase().includes(searchTerm.toLowerCase()))
   });
 
+  const handleAdd = () => {
+    // Implement logic to open modal or form for creating a new song
+    console.log("Add button clicked");
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
       <Search placeholder="Search Song" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
+      <Button type="primary" onClick={showModal} style={{ marginLeft: 100, marginBottom: 16 }}>
+        Add
+      </Button>
+      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Form
+      {...layout}
+      style={{ maxWidth: 600 }}
+    >
+      <Form.Item name="key" label="Key" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="artist" label="Artist" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="block" label="Block" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="gerne" label="Gerne" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item {...tailLayout}>
+      </Form.Item>
+    </Form>
+      </Modal>
+      </div>
       <Table columns={columns} dataSource={filteredData} />
     </>
   );
