@@ -70,7 +70,7 @@ class artistController {
                 res.status(500).json({ error: 'Failed to add Artist' });
             });
     }
-    deleteSong(req, res, next) {
+    deleteArtist(req, res, next) {
         artistModel
             .deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
@@ -91,7 +91,7 @@ class artistController {
         });
     }
 
-    updateSong(req, res) {
+    updateArtist(req, res) {
         const artistDataBody = req.body;
         const updatedartistData = {
             id: String(artistDataBody?.id),
