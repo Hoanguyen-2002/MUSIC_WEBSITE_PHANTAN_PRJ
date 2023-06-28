@@ -1,21 +1,21 @@
-const songModel = require('../models/SongModel');
+const artistModel = require('../models/ArtistModel');
 
-class songController {
-    getAllSong(req, res) {
+class artistController {
+    getAllArtist(req, res) {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
     
-        songModel.countDocuments({}, function (err, count) {
+        artistModel.countDocuments({}, function (err, count) {
             if (err) {
                 return res.status(500).json({ error: 'Error!!!' });
             }
     
-            songModel
+            artistModel
                 .find({})
                 .skip(skip)
                 .limit(limit)
-                .exec(function (err, songModels) {
+                .exec(function (err, artistModels) {
                     if (err) {
                         return res.status(500).json({ error: 'Error!!!' });
                     }
@@ -23,7 +23,7 @@ class songController {
                     const totalPages = Math.ceil(count / limit);
     
                     res.json({
-                        songModels,
+                        artistModels,
                         currentPage: page,
                         totalPages,
                     });
@@ -32,8 +32,8 @@ class songController {
     }
 
     findByName(req, res) {
-        const songName = req.body.name;
-        songModel.find({ songName }, (err, items) => {
+        const artistName = req.body.name;
+        artistModel.find({ artistName }, (err, items) => {
             if (err) {
                 console.log(err);
                 res.status(500).send(err);
@@ -45,38 +45,33 @@ class songController {
         });
     }
 
-    addSong(req, res) {
+    addArtist(req, res) {
         console.log(req.body);
-        const songData = req.body;
-        const newSong = new songModel({
-            id: String(songData?.id),
-            thumb: String(songData?.thumb),
-            artistIds: String(songData?.artistIds),
-            artist: String(songData?.artist),
-            duration: String(songData?.duration),
-            block: String(songData?.block),
-            hasVideo: String(songData?.hasVideo),
-            videoLink: String(songData?.videoLink),
-            name: String(songData?.name),
-            genre: String(songData?.genre),
+        const artistData = req.body;
+        const newArtist = new artistModel({
+            id: String(artistData?.id),
+            name: String(artistData?.name),
+            link: String(artistData?.link),
+            cover: String(artistData?.cover),
+            thumbnail: String(artistData?.thumbnail),
         });
-        console.log(newSong);
-        newSong
+        console.log(newArtist);
+        newArtist
             .save()
             .then((test) => {
-                console.log('Added new test case to database:', test);
+                console.log('Added new artist to database:', test);
                 res.status(201).json({
-                    message: 'Test case added successfully',
+                    message: 'Artist added successfully',
                     test,
                 });
             })
             .catch((err) => {
-                console.error('Error adding test case to database:', err);
-                res.status(500).json({ error: 'Failed to add test case' });
+                console.error('Error adding Artist to database:', err);
+                res.status(500).json({ error: 'Failed to add Artist' });
             });
     }
-    deleteSong(req, res, next) {
-        songModel
+    deleteArtist(req, res, next) {
+        artistModel
             .deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
@@ -84,7 +79,7 @@ class songController {
 
     findByName(req, res) {
         const name = req.params.songName;
-        songModel.find({ name }, (err, item) => {
+        artistModel.find({ name }, (err, item) => {
             if (err) {
                 console.log(err);
                 res.status(500).send(err);
@@ -96,32 +91,27 @@ class songController {
         });
     }
 
-    updateSong(req, res) {
-        const SongDataBody = req.body;
-        const updatedSongData = {
-            id: String(SongDataBody?.id),
-            thumb: String(SongDataBody?.thumb),
-            artist: String(SongDataBody?.artist),
-            artistIds: String(SongDataBody?.artistIds),
-            block: String(SongDataBody?.block),
-            hasVideo: Boolean(SongDataBody?.hasVideo),
-            videoLink: String(SongDataBody?.videoLink),
-            name: String(SongDataBody?.name),
-            genre: String(SongDataBody?.genre),
-            
+    updateArtist(req, res) {
+        const artistDataBody = req.body;
+        const updatedartistData = {
+            id: String(artistDataBody?.id),
+            name: String(artistDataBody?.name),
+            link: String(artistDataBody?.link),
+            cover: String(artistDataBody?.cover),
+            thumbnail: String(artistDataBody?.thumbnail),
         };
   
-        songModel
+        artistModel
         .findOneAndUpdate(
-            { patientID: SongDataBody.patientID },
-            updatedSongData,
+            { name: artistDataBody.name },
+            updatedartistData,
             { new: true },
         )
         .then((test) => {
             if (test) {
                 console.log('Updated song in the database:', test);
                 res.status(200).json({
-                    message: 'Test case updated successfully',
+                    message: 'Artist updated successfully',
                     test,
                 });
             } else {
@@ -141,4 +131,4 @@ class songController {
     }
 }
 
-module.exports = new songController();
+module.exports = new artistController();
