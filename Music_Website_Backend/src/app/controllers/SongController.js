@@ -71,7 +71,7 @@ class songController {
                 res.status(500).json({ error: 'Failed to add test case' });
             });
     }
-    delete(req, res, next) {
+    deleteSong(req, res, next) {
         songModel
             .deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
@@ -92,7 +92,7 @@ class songController {
         });
     }
 
-    updateTest(req, res) {
+    updateSong(req, res) {
         const SongDataBody = req.body;
         const updatedSongData = {
             id: String(SongDataBody?.id),
