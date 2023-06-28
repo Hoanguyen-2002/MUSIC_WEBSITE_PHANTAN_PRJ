@@ -36,7 +36,13 @@ const ArtistAdd: React.FC = () => {
       <Form.Item name="name" label="Name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="access" label="Access" rules={[{ required: true }]}>
+      <Form.Item name="link" label="Link" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="cover" label="Cover" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="thumbnail" label="Thumbnail" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item {...tailLayout}>

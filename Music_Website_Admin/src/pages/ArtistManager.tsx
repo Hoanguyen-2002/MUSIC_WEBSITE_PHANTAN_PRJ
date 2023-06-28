@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Space, Table, Tag, Input, Button, Modal} from 'antd';
+import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
@@ -83,6 +83,15 @@ const data: DataType[] = [
   },
 ];
 
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
+
 const ArtistManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -122,9 +131,55 @@ const ArtistManager: React.FC = () => {
       ||  item.key.toLowerCase().includes(searchTerm.toLowerCase()));
   });
 
+  const handleAdd = () => {
+    // Implement logic to open modal or form for creating a new song
+    console.log("Add button clicked");
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
-      <Search placeholder="Search Singer" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <Search placeholder="Search Artist" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
+      <Button type="primary" onClick={showModal} style={{ marginLeft: 100, marginBottom: 16 }}>
+        Add
+      </Button>
+      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Form
+      {...layout}
+      style={{ maxWidth: 600 }}
+    >
+      <Form.Item name="key" label="Key" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="link" label="Link" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="cover" label="Cover" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="thumbnail" label="Thumbnail" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+    </Form>
+      </Modal>
+      </div>
       <Table columns={columns} dataSource={filteredData} />
     </>
   );
