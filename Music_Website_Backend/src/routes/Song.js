@@ -4,7 +4,7 @@ const songController = require('../app/controllers/SongController');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
-router.get('/get-all', songController.findAllSong);
+router.get('/get-all', songController.getAllSong);
 router.post('/find-by-name', songController.findByName);
 
 module.exports = router;

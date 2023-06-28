@@ -1,7 +1,7 @@
 const songModel = require('../models/SongModel');
 
 class songController {
-    findAllSong(req, res) {
+    getAllSong(req, res) {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
