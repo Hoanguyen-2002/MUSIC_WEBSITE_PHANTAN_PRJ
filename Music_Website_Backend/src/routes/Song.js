@@ -7,6 +7,7 @@ router.use(bodyParser.json());
 router.get('/get-all', songController.getAllSong);
 router.post('/find-by-name', songController.findByName);
 router.post('/update-song', songController.updateSong);
+router.post('/add-song', songController.addSong);
 router.delete('/delete/:id', songController.deleteSong);
 
 module.exports = router;
