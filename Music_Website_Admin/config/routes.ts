@@ -50,27 +50,33 @@ export default [
       },
     ],
   },
+  // {
+  //   path: '/artist',
+  //   name: 'Ca Sĩ',
+  //   icon: '👩🏿‍🎤',
+  //   access: 'canAdmin',
+  //   routes: [
+  //     {
+  //       path: '/artist',
+  //       redirect: '/artist/sub-page',
+  //     },
+  //     {
+  //       path: '/artist/artist-manager',
+  //       name: 'Quản lý ca sĩ',
+  //       component: './ArtistManager',
+  //     },
+  //     {
+  //       path: '/artist/add-artist',
+  //       name: 'Thêm ca sĩ',
+  //       component: './ArtistAdd',
+  //     },
+  //   ],
+  // },
   {
-    path: '/artist',
-    name: 'Ca Sĩ',
+    path: '/artist-manager',
+    name: 'Quản lý ca sĩ',
     icon: '👩🏿‍🎤',
-    access: 'canAdmin',
-    routes: [
-      {
-        path: '/artist',
-        redirect: '/artist/sub-page',
-      },
-      {
-        path: '/artist/artist-manager',
-        name: 'Quản lý ca sĩ',
-        component: './ArtistManager',
-      },
-      {
-        path: '/artist/add-artist',
-        name: 'Thêm ca sĩ',
-        component: './ArtistAdd',
-      },
-    ],
+    component: './ArtistManager',
   },
   {
     path: '/song-manager',
