@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import PlayPause from './PlayPause';
 import { playPause, setActiveSong } from '../redux/features/playerSlice';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faHeart} from '@fortawesome/free-solid-svg-icons'
 
 const SongCard = ({song,isPlaying,activeSong,data,i}) => {
   const dispatch = useDispatch();
@@ -36,6 +38,9 @@ const SongCard = ({song,isPlaying,activeSong,data,i}) => {
       <p className='text-sm text-gray-300 mt-1'>
         <a href={song.artists ? `/artists/${song?.artists[0]?.adamid}` : '/top-artists'}>{song.subtitle}</a>
       </p>
+      <button>
+            <FontAwesomeIcon icon={faHeart} size="2x" className="custom-icon"/>
+      </button>
     </div>
   </div>
 )};
