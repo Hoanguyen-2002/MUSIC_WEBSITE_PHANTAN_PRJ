@@ -60,8 +60,8 @@ const TopPlay = () => {
     <div ref={divRef} className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[400px] max-w-full flex flex-col">
       <div className="w-full flex flex-col">
         <div className="flex flex-row justify-between items-center">
-          <h2 className="text-white font-bold text-2xl">Top Charts</h2>
-          <a href="/top-charts"><p className="text-gray-300 cursor-pointer text-base">See more</p></a>
+          <h2 className="text-white font-bold text-2xl">Top BXH</h2>
+          <a href="/top-charts"><p className="text-gray-300 cursor-pointer text-base">Xem thêm</p></a>
         </div>
         <div className="flex flex-col gap-1 mt-4">
           {topPlays?.map((song,i)=>(
@@ -79,9 +79,9 @@ const TopPlay = () => {
       </div>
       <div className="w-full flex flex-col mt-8">
         <div className="flex flex-row justify-between items-center">
-          <h2 className="text-white font-bold text-2xl">Top Artists</h2>
+          <h2 className="text-white font-bold text-2xl">Top Nghệ Sĩ</h2>
           <Link to="/top-artists">
-            <p className="text-gray-300 text-base cursor-pointer">See more</p>
+            <p className="text-gray-300 text-base cursor-pointer">Xem thêm</p>
           </Link>
         </div>
 
