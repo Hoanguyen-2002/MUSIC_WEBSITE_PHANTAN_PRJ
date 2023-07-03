@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import PlayPause from './PlayPause';
 import { playPause, setActiveSong } from '../redux/features/playerSlice';
+// import '../components/index.js'
+// import '../index.css'
 
 const SongCard = ({song,isPlaying,activeSong,data,i}) => {
   const dispatch = useDispatch();
@@ -36,6 +38,7 @@ const SongCard = ({song,isPlaying,activeSong,data,i}) => {
       <p className='text-sm text-gray-300 mt-1'>
         <a href={song.artists ? `/artists/${song?.artists[0]?.adamid}` : '/top-artists'}>{song.subtitle}</a>
       </p>
+      <span class="favorite-icon">&#9825;</span>
     </div>
   </div>
 )};

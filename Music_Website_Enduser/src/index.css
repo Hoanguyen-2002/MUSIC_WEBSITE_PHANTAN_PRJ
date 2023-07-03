@@ -41,3 +41,14 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.favorite-icon {
+  color: pink;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.favorite-icon:hover {
+  color: red;
+}
+
