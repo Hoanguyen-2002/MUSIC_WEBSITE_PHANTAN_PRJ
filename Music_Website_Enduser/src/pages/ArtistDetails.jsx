@@ -15,7 +15,7 @@ const ArtistDetails = () => {
     console.log(artistData?.data[0])
   
 
-    if(isfetchingArtistDetails) return <Loader title={'Loading artist details'}/>
+    if(isfetchingArtistDetails) return <Loader title={'Đang tải thông tin Nghệ Sĩ'}/>
     if(errorAD) return <Error/>
 
     // const handlePauseClick = () => {
