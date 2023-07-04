@@ -106,28 +106,28 @@ const UserManager: React.FC = () => {
 
   const handleEdit = (record: DataType) => {
     // Open the edit form for the corresponding record
-    console.log(`Editing record with key ${record.key}`);
+    //console.log(`Editing record with key ${record.key}`);
   };
 
   const handleDelete = (key: string) => {
     // Delete the corresponding record
-    console.log(`Deleting record with key ${key}`);
+    //console.log(`Deleting record with key ${key}`);
   };
 
   const showDeleteConfirm = (record: DataType) => {
-    confirm({
-      title: `Are you sure you want to delete ${record.name}?`,
-      icon: <ExclamationCircleOutlined />,
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        handleDelete(record.key);
-      },
-      onCancel() {
-        console.log('Cancel');
-      },
-    });
+    // confirm({
+    //   title: `Are you sure you want to delete ${record.name}?`,
+    //   icon: <ExclamationCircleOutlined />,
+    //   okText: 'Yes',
+    //   okType: 'danger',
+    //   cancelText: 'No',
+    //   onOk() {
+    //     handleDelete(record.key);
+    //   },
+    //   onCancel() {
+    //     console.log('Cancel');
+    //   },
+    // });
   };
 
   const filteredData = data.filter((item) => {
@@ -164,7 +164,7 @@ const UserManager: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
       <Search placeholder="Search User" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
       <Button type="primary" onClick={showModal} style={{ marginLeft: 100, marginBottom: 16 }}>
-        Add
+        ADD
       </Button>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
       <Form
