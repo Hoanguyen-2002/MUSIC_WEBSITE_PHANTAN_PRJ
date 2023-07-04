@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Space, Table, Tag, Input, Button, Modal } from 'antd';
+import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
   key: string;
   name: string;
-  access: string;
+  link: string;
+  cover: string;
+  thumbnail: string;
 }
 
 const { Search } = Input;
@@ -24,9 +26,19 @@ const columns: ColumnsType<DataType> = [
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Access',
-    dataIndex: 'access',
-    key: 'access',
+    title: 'Link',
+    dataIndex: 'link',
+    key: 'link',
+  },
+  {
+    title: 'Cover',
+    dataIndex: 'cover',
+    key: 'cover',
+  },
+  {
+    title: 'Thumbnail',
+    dataIndex: 'thumbnail',
+    key: 'thumbnail',
   },
   {
     title: 'Action',
@@ -43,27 +55,44 @@ const columns: ColumnsType<DataType> = [
 const data: DataType[] = [
   {
     key: '1',
-    name: 'Vu Duc Duy',
-    access: '1',
+    name: 'Nirvana',
+    link: '1',
+    cover: '1',
+    thumbnail: '1',
   },
   {
     key: '2',
-    name: 'Tran Quang Thang',
-    access: '1',
+    name: 'Birdy',
+    link: '1',
+    cover: '1',
+    thumbnail: '1',
   },
   {
     key: '3',
-    name: 'Nguyen Viet Hoa',
-    access: '1',
+    name: 'Conan Gray',
+    link: '1',
+    cover: '1',
+    thumbnail: '1',
   },
   {
     key: '4',
-    name: 'Bui Trung Kien',
-    access: '1',
+    name: 'Coldplay',
+    link: '1',
+    cover: '1',
+    thumbnail: '1',
   },
 ];
 
-const UserManager: React.FC = () => {
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
+
+const ArtistManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,7 +112,7 @@ const UserManager: React.FC = () => {
   const showDeleteConfirm = (record: DataType) => {
     confirm({
       title: `Are you sure you want to delete ${record.name}?`,
-      icon: <ExclamationCircleOutlined />,
+      icon: <ExclamationOutlined />,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
@@ -99,16 +128,61 @@ const UserManager: React.FC = () => {
   const filteredData = data.filter((item) => {
     return (
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ||  item.access.toLowerCase().includes(searchTerm.toLowerCase())
       ||  item.key.toLowerCase().includes(searchTerm.toLowerCase()));
   });
 
+  const handleAdd = () => {
+    // Implement logic to open modal or form for creating a new song
+    console.log("Add button clicked");
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
-      <Search placeholder="Search Singer" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <Search placeholder="Search Artist" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
+      <Button type="primary" onClick={showModal} style={{ marginLeft: 100, marginBottom: 16 }}>
+        Add
+      </Button>
+      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Form
+      {...layout}
+      style={{ maxWidth: 600 }}
+    >
+      <Form.Item name="key" label="Key" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="link" label="Link" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="cover" label="Cover" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="thumbnail" label="Thumbnail" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+    </Form>
+      </Modal>
+      </div>
       <Table columns={columns} dataSource={filteredData} />
     </>
   );
 };
 
-export default UserManager;
+export default ArtistManager;

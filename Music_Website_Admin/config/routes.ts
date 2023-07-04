@@ -26,13 +26,13 @@ export default [
     path: '/welcome',
     name: 'welcome',
     icon: 'smile',
-    component: './Admin',
+    component: './Welcome',
   },
   {
     path: '/user',
     name: 'Người dùng',
     icon: '👤',
-    //access: 'canAdmin',
+    access: 'canAdmin',
     routes: [
       {
         path: '/user',
@@ -50,49 +50,39 @@ export default [
       },
     ],
   },
+  // {
+  //   path: '/artist',
+  //   name: 'Ca Sĩ',
+  //   icon: '👩🏿‍🎤',
+  //   access: 'canAdmin',
+  //   routes: [
+  //     {
+  //       path: '/artist',
+  //       redirect: '/artist/sub-page',
+  //     },
+  //     {
+  //       path: '/artist/artist-manager',
+  //       name: 'Quản lý ca sĩ',
+  //       component: './ArtistManager',
+  //     },
+  //     {
+  //       path: '/artist/add-artist',
+  //       name: 'Thêm ca sĩ',
+  //       component: './ArtistAdd',
+  //     },
+  //   ],
+  // },
   {
-    path: '/artist',
-    name: 'Ca Sĩ',
+    path: '/artist-manager',
+    name: 'Quản lý ca sĩ',
     icon: '👩🏿‍🎤',
-    //access: 'canAdmin',
-    routes: [
-      {
-        path: '/artist',
-        redirect: '/artist/sub-page',
-      },
-      {
-        path: '/artist/artist-manager',
-        name: 'Quản lý ca sĩ',
-        component: './ArtistManager',
-      },
-      {
-        path: '/artist/add-artist',
-        name: 'Thêm ca sĩ',
-        component: './ArtistAdd',
-      },
-    ],
+    component: './ArtistManager',
   },
   {
-    path: '/song',
-    name: 'Bài hát',
+    path: '/song-manager',
+    name: 'Quản lý bài hát',
     icon: '🎶',
-    //access: 'canAdmin',
-    routes: [
-      {
-        path: '/song',
-        redirect: '/song/sub-page',
-      },
-      {
-        path: '/song/song-manager',
-        name: 'Quản lý bài hát',
-        component: './SongManager',
-      },
-      {
-        path: '/song/add-song',
-        name: 'Thêm bài hát',
-        component: './SongAdd',
-      },
-    ],
+    component: './SongManager',
   },
   {
     name: 'list.table-list',
