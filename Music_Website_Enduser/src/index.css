@@ -52,3 +52,7 @@
 .custom-icon:hover {
   color: pink;
 }
+
+.custom-icon.fill-color{
+    color: red;
+}
