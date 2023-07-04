@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -7,8 +7,13 @@ import { playPause, setActiveSong } from '../redux/features/playerSlice';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faHeart} from '@fortawesome/free-solid-svg-icons'
 
+
 const SongCard = ({song,isPlaying,activeSong,data,i}) => {
   const dispatch = useDispatch();
+  const [isClicked, setIsClicked] = useState(false);
+  const handleHeartClick = () => {
+      setIsClicked(!isClicked);
+    };
   const handlePauseClick=()=>{
     dispatch(playPause(false));
   };
@@ -39,10 +44,12 @@ const SongCard = ({song,isPlaying,activeSong,data,i}) => {
         <a href={song.artists ? `/artists/${song?.artists[0]?.adamid}` : '/top-artists'}>{song.subtitle}</a>
       </p>
       <button>
-            <FontAwesomeIcon icon={faHeart} size="2x" className="custom-icon"/>
+            <FontAwesomeIcon icon={faHeart} size="2x" className="custom-icon" onClick={handleHeartClick}
+          style={{ color: isClicked ? 'red' : 'white' }}/>   
       </button>
     </div>
   </div>
 )};
 
 export default SongCard;
+
