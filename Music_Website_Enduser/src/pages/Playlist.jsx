@@ -12,7 +12,7 @@ const Playlist = () => {
     console.log(data);
     
     // const genretitle = {value};
-    if(isFetching) return <Loader title="Đang Tải Bài Hát..."/>
+    if(isFetching) return <Loader title="Đang tải bài hát..."/>
     if(error) return <Error/>
 
     return (
