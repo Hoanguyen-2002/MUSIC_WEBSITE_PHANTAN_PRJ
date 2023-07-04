@@ -155,7 +155,7 @@ const ArtistManager: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
       <Search placeholder="Search Artist" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
       <Button type="primary" onClick={showModal} style={{ marginLeft: 100, marginBottom: 16 }}>
-        Add
+        ADD
       </Button>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
       <Form

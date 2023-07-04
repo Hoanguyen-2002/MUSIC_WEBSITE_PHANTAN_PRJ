@@ -77,7 +77,7 @@ const InfoCard: React.FC<{
         {desc}
       </div>
       <a href={href} target="_blank" rel="noreferrer">
-        了解更多 {'>'}
+        Learn more {'>'}
       </a>
     </div>
   );
@@ -101,9 +101,9 @@ const Welcome: React.FC = () => {
       >
         <div
           style={{
-            backgroundPosition: '100% -30%',
+            backgroundPosition: '100% -10%',
             backgroundRepeat: 'no-repeat',
-            backgroundSize: '274px auto',
+            backgroundSize: '150px auto',
             backgroundImage:
               "url('https://img.freepik.com/free-vector/white-musical-background-with-sound-note-equalizer_1017-33907.jpg?w=2000')",
           }}
@@ -114,7 +114,7 @@ const Welcome: React.FC = () => {
               color: token.colorTextHeading,
             }}
           >
-            HI!
+            Hi!
           </div>
           <div
             style={{
@@ -143,13 +143,13 @@ const Welcome: React.FC = () => {
               gap: 16,
             }}
           >
-            <InfoCard
+            {/* <InfoCard
               index={1}
               href="https://umijs.org/docs/introduce/introduce"
               title="了解 umi"
               desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
             />
-            {/* <InfoCard
+            <InfoCard
               index={2}
               title="了解 ant design"
               href="https://ant.design"
