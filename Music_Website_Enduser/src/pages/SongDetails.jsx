@@ -17,7 +17,7 @@ const SongDetails = () => {
     console.log(songData?.sections[1].text);
     console.log(data)
 
-    if(isfetchingSongDetails || isFetchingRelatedSongs) return <Loader title={'Searching song details'}/>
+    if(isfetchingSongDetails || isFetchingRelatedSongs) return <Loader title={'Đang tải thông tin bài hát..'}/>
     if(error) return <Error/>
 
     const handlePauseClick = () => {
