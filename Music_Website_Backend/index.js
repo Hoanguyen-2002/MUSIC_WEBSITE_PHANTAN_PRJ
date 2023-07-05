@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const compression= require('compression');
 const app = express();
 const port = process.env.PORT || 3000;
-const clientURL = process.env.CLIENT_URL || '0.0.0.0';
+const clientURL = process.env.CLIENT_URL || 'http://localhost:8000';
 
 const route = require('./src/routes');
 const db = require('./src/config/db');
