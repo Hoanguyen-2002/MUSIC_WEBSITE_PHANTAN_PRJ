@@ -1,15 +1,39 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 export const Register = (props) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(email);
+  //   console.log(pass);
+  //   console.log(confirmPass);
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(pass);
-    console.log(confirmPass);
+    console.log("hello");
+    
+    // Tạo một đối tượng chứa dữ liệu đăng nhập
+    const registerData = {
+      email: email,
+      password: pass,
+      confirmPass : confirmPass
+    };
+    
+    // Gửi yêu cầu đăng nhập đến API
+    axios.post("http://localhost:3000/user/register", registerData)
+      .then(response => {
+        // Xử lý phản hồi từ API
+        console.log(response.data);
+      })
+      .catch(error => {
+        // Xử lý lỗi nếu có
+        console.error(error);
+      });
   };
 
   return (
