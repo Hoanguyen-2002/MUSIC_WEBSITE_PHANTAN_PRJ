@@ -2,6 +2,10 @@ const accountModel = require('../models/UserModel');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+const util = require('util');
+const hashAsync = util.promisify(bcrypt.hash);
+
+
 class userController {
     login = async (req, res) => {
         try {
@@ -43,49 +47,49 @@ class userController {
         }
     };
 
+    
     register = async (req, res) => {
         try {
-            const userBody = req.body;
-
-            // Check if the email already exists in the database
-            const existingUser = await accountModel.findOne({
-                email: userBody.email,
-            });
-            if (existingUser) {
-                return res
-                    .status(409)
-                    .json({ message: 'Email already exists' });
-            }
-
-            // Hash the password
-            const hashedPassword = await bcrypt.hash(userBody.password, 10);
-
-            // Create a new user object with hashed password
-            const newUser = new accountModel({
-                email: userBody.email,
-                password: hashedPassword,
-                access: userBody.access,
-                name: userBody.name,
-                phone: userBody.phone,
-                avatar: userBody.avatar,
-                address: userBody.address,
-            });
-
-            // Save the new user to the database
-            const savedUser = await newUser.save();
-
-            res.status(201).json({
-                message: 'User registered successfully',
-                user: savedUser,
-            });
+          const userBody = req.body;
+      
+          // Check if the email already exists in the database
+          const existingUser = await accountModel.findOne({
+            email: userBody.email,
+          });
+          if (existingUser) {
+            return res.status(409).json({ message: 'Email already exists' });
+          }
+      
+          // Hash the password
+          const saltRounds = 10;
+        //   const hashedPassword = await hashAsync(userBody.password, saltRounds);
+      
+          // Create a new user object with hashed password
+          const newUser = new accountModel({
+            email: userBody.email,
+            password: userBody.password,
+            access: userBody.access,
+            name: userBody.name,
+            phone: userBody.phone,
+            avatar: userBody.avatar,
+            address: userBody.address,
+          });
+      
+          // Save the new user to the database
+          const savedUser = await newUser.save();
+      
+          res.status(201).json({
+            message: 'User registered successfully',
+            user: savedUser,
+          });
         } catch (error) {
-            console.error('Error registering user:', error);
-            res.status(500).json({
-                error: 'Failed to register user',
-                status: 'error',
-            });
+          console.error('Error registering user:', error);
+          res.status(500).json({
+            error: 'Failed to register user',
+            status: 'error',
+          });
         }
-    };
+      };
 
     findUser = async (req, res) => {
         try {
@@ -140,6 +144,36 @@ class userController {
             res.status(500).json({ message: 'An error occurred' });
         }
     };
+
+    getAllUser(req, res) {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+    
+        accountModel.countDocuments({}, function (err, count) {
+            if (err) {
+                return res.status(500).json({ error: 'Error!!!' });
+            }
+    
+            accountModel
+                .find({})
+                .skip(skip)
+                .limit(limit)
+                .exec(function (err, accountModels) {
+                    if (err) {
+                        return res.status(500).json({ error: 'Error!!!' });
+                    }
+    
+                    const totalPages = Math.ceil(count / limit);
+    
+                    res.json({
+                        accountModels,
+                        currentPage: page,
+                        totalPages,
+                    });
+                });
+        });
+    }
 }
 
 module.exports = new userController();

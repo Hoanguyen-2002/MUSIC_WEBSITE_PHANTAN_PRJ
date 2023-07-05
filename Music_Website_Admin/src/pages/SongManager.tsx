@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
+import { Space, Table, Tag, Input, Button, Modal, Form, message } from 'antd';
 import Icon, { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
 import CRUDService from '@/services/CRUDService';
 
 interface DataType {
@@ -15,114 +14,96 @@ interface DataType {
 const { Search } = Input;
 const { confirm } = Modal;
 
-const handleEdit = (record: DataType) => {
-  // Open the edit form for the corresponding record
-  console.log(`Editing record with key ${record.key}`);
-};
-
-const handleDelete = (key: string) => {
-  // Delete the corresponding record
-  console.log(`Deleting record with key ${key}`);
-};
-
-const showDeleteConfirm = (record: DataType) => {
-  confirm({
-    title: `Are you sure you want to delete ${record.name}?`,
-    icon: <ExclamationCircleOutlined />,
-    okText: 'Yes',
-    okType: 'danger',
-    cancelText: 'No',
-    onOk() {
-      handleDelete(record.key);
-    },
-    onCancel() {
-      console.log('Cancel');
-    },
-  });
-};
-
-const columns: ColumnsType<DataType> = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Artist',
-    dataIndex: 'artist',
-    key: 'artist',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Block',
-    dataIndex: 'block',
-    key: 'block',
-  },
-  {
-    title: 'Gerne',
-    dataIndex: 'gerne',
-    key: 'gerne',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
-        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Delete</Button>
-      </Space>
-    ),
-  },
-];
-
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
-
-const handleEdit = (record: DataType) => {
-  // Open the edit form for the corresponding record
-  console.log(`Editing record with key ${record.name}`);
-};
-
-const handleDelete = (key: string) => {
-  // Delete the corresponding record
-  console.log(`Deleting record with key ${key}`);
-};
-
-const showDeleteConfirm = (record: DataType) => {
-  confirm({
-    title: `Are you sure you want to delete ${record.name}?`,
-    icon: <ExclamationCircleOutlined />,
-    okText: 'Yes',
-    okType: 'danger',
-    cancelText: 'No',
-    onOk() {
-      handleDelete(record.name);
-    },
-    onCancel() {
-      console.log('Cancel');
-    },
-  });
-};
 
 const SongManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [form] = Form.useForm();
   const [dataSong, setDataSong] = useState([]);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const handleEdit = (record: DataType) => {
+    // Open the edit form for the corresponding record
+    console.log(`Editing record with key`);
+  };
+  
+  
+  const handleDelete = (id: String) => {
+    confirm({
+      title: `Bạn muốn xóa bài hát này?`,
+      icon: <ExclamationCircleOutlined />,
+      cancelText: 'Hủy',
+      okText: 'Xóa',
+      okType: 'danger',
+      onOk() {
+        fetch(`http://localhost:3000/song/delete/${id}`, {
+          method: 'DELETE',
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Lỗi khi xóa');
+            }
+            message.success('Xóa thành công');
+            getSongInfo();
+          })
+          .catch((error) => {
+            message.error(error.message);
+          });
+      },
+    });
+  };
+  
+
+  const columns: ColumnsType<DataType> = [
+    {
+      title: 'id',
+      dataIndex: '_id',
+      key: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Artist',
+      dataIndex: 'artist',
+      key: 'artist',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Link',
+      dataIndex: 'block',
+      key: 'block',
+      render: (text) => <a href={text}>link</a>,
+    },
+    {
+      title: 'Gerne',
+      dataIndex: 'genre',
+      key: 'genre',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
+          <Button type="primary" danger onClick={() => handleDelete(record._id)}>Delete</Button>
+        </Space>
+      ),
+    },
+  ];
+  
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
+  
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
   };
 
-  const handleAdd = () => {
-    // Implement logic to open modal or form for creating a new song
-    console.log("Add button clicked");
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -150,6 +131,7 @@ const SongManager: React.FC = () => {
       const values = await form.validateFields();
       console.log(values);
       await CRUDService.saveService('http://localhost:3000/song/add-song', values);
+      getSongInfo();
     } catch (error) {
       console.error(error);
     }
