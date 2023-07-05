@@ -115,7 +115,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
     {
       key: 'logout',
       icon: <LogoutOutlined />,
-      label: 'Log out',
+      label: 'Đăng xuất',
     },
   ];
 

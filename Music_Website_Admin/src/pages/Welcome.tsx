@@ -114,7 +114,7 @@ const Welcome: React.FC = () => {
               color: token.colorTextHeading,
             }}
           >
-            Hi!
+            Xin chào!
           </div>
           <div
             style={{
@@ -122,7 +122,7 @@ const Welcome: React.FC = () => {
               color: token.colorTextHeading,
             }}
           >
-            Welcome to Admin page
+            Chào mừng đến trang quản lý
           </div>
           <p
             style={{

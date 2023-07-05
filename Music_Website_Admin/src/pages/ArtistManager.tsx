@@ -15,18 +15,18 @@ const { confirm } = Modal;
 
 const columns: ColumnsType<DataType> = [
   {
-    title: 'Name',
+    title: 'Tên ca sĩ',
     dataIndex: 'name',
     key: 'name',
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Link',
+    title: 'Đường dẫn',
     dataIndex: 'link',
     key: 'link',
   },
   {
-    title: 'Cover',
+    title: 'Ảnh',
     dataIndex: 'cover',
     key: 'cover',
   },
@@ -36,12 +36,12 @@ const columns: ColumnsType<DataType> = [
     key: 'thumbnail',
   },
   {
-    title: 'Action',
+    title: 'Hành động',
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
-        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Delete</Button>
+        <Button type="primary" onClick={() => handleEdit(record)}>Sửa</Button>
+        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Xóa</Button>
       </Space>
     ),
   },
@@ -145,20 +145,20 @@ const ArtistManager: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
       <Search placeholder="Search Artist" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
       <Button type="primary" onClick={showModal} style={{ marginLeft: 100, marginBottom: 16 }}>
-        ADD
+        Thêm
       </Button>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
       <Form
       {...layout}
       style={{ maxWidth: 600 }}
     >
-      <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+      <Form.Item name="name" label="Tên ca sĩ" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="link" label="Link" rules={[{ required: true }]}>
+      <Form.Item name="link" label="Đường dẫn" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="cover" label="Cover" rules={[{ required: true }]}>
+      <Form.Item name="cover" label="Ảnh" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name="thumbnail" label="Thumbnail" rules={[{ required: true }]}>

@@ -17,7 +17,7 @@ const { confirm } = Modal;
 
 const columns: ColumnsType<DataType> = [
   {
-    title: 'Name',
+    title: 'Tên người dùng',
     dataIndex: 'name',
     key: 'name',
     render: (_, record) => (
@@ -32,32 +32,32 @@ const columns: ColumnsType<DataType> = [
     key: 'email',
   },
   {
-    title: 'Password',
+    title: 'Mật khẩu',
     dataIndex: 'password',
     key: 'password',
   },
   {
-    title: 'Access',
+    title: 'Quyền',
     dataIndex: 'access',
     key: 'access',
   },
   {
-    title: 'Detail',
+    title: 'Chi tiết',
     dataIndex: 'detail',
     key: 'detail',
   },
   {
-    title: 'Phone',
+    title: 'Số điện thoại',
     dataIndex: 'phone',
     key: 'phone',
   },
   {
-    title: 'Action',
+    title: 'Hành động',
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
-        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Delete</Button>
+        <Button type="primary" onClick={() => handleEdit(record)}>Sửa</Button>
+        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Xóa</Button>
       </Space>
     ),
   },
@@ -178,29 +178,29 @@ const UserManager: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
       <Search placeholder="Search User" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
       <Button type="primary" onClick={showModal} style={{ marginLeft: 100, marginBottom: 16 }}>
-        ADD
+        Thêm
       </Button>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
       <Form
       {...layout}
       style={{ maxWidth: 600 }}
     >
-      <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+      <Form.Item name="name" label="Tên người dùng" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name="email" label="Email" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="password" label="Password" rules={[{ required: true }]}>
+      <Form.Item name="password" label="Mật khẩu" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="access" label="Access" rules={[{ required: true }]}>
+      <Form.Item name="access" label="Quyền" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="detail" label="Detail" rules={[{ required: true }]}>
+      <Form.Item name="detail" label="Chi tiết" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="phone" label="Phone" rules={[{ required: true }]}>
+      <Form.Item name="phone" label="Số điện thoại" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item {...tailLayout}>

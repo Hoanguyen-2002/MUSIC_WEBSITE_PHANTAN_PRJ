@@ -15,34 +15,34 @@ const { confirm } = Modal;
 
 const columns: ColumnsType<DataType> = [
   {
-    title: 'Name',
+    title: 'Tên bài hát',
     dataIndex: 'name',
     key: 'name',
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Artist',
+    title: 'Nghệ sĩ',
     dataIndex: 'artist',
     key: 'artist',
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Block',
+    title: 'Đường dẫn',
     dataIndex: 'block',
     key: 'block',
   },
   {
-    title: 'Gerne',
+    title: 'Thể loại',
     dataIndex: 'gerne',
     key: 'gerne',
   },
   {
-    title: 'Action',
+    title: 'Hành động',
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
-        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Delete</Button>
+        <Button type="primary" onClick={() => handleEdit(record)}>Sửa</Button>
+        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Xóa</Button>
       </Space>
     ),
   },
@@ -149,23 +149,23 @@ const SongManager: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
       <Search placeholder="Search Song" onChange={handleSearch} style={{ marginBottom: 16, width: '50%' }} />
       <Button type="primary" onClick={showModal} style={{ marginLeft: 100, marginBottom: 16 }}>
-        ADD
+        Thêm
       </Button>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
       <Form
       {...layout}
       style={{ maxWidth: 600 }}
     >
-      <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+      <Form.Item name="name" label="Tên bài hát" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="artist" label="Artist" rules={[{ required: true }]}>
+      <Form.Item name="artist" label="Nghệ sĩ" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="block" label="Block" rules={[{ required: true }]}>
+      <Form.Item name="block" label="Đường dẫn" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="gerne" label="Gerne" rules={[{ required: true }]}>
+      <Form.Item name="gerne" label="Thể loại" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item {...tailLayout}>
