@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import CRUDService from '@/services/CRUDService';
 
 interface DataType {
   key: string;
@@ -13,10 +15,36 @@ interface DataType {
 const { Search } = Input;
 const { confirm } = Modal;
 
+const handleEdit = (record: DataType) => {
+  // Open the edit form for the corresponding record
+  console.log(`Editing record with key ${record.key}`);
+};
+
+const handleDelete = (key: string) => {
+  // Delete the corresponding record
+  console.log(`Deleting record with key ${key}`);
+};
+
+const showDeleteConfirm = (record: DataType) => {
+  confirm({
+    title: `Are you sure you want to delete ${record.name}?`,
+    icon: <ExclamationCircleOutlined />,
+    okText: 'Yes',
+    okType: 'danger',
+    cancelText: 'No',
+    onOk() {
+      handleDelete(record.key);
+    },
+    onCancel() {
+      console.log('Cancel');
+    },
+  });
+};
+
 const columns: ColumnsType<DataType> = [
   {
     title: 'Key',
-    dataIndex: 'key',
+    dataIndex: '_id',
     key: 'key',
   },
   {
@@ -53,37 +81,6 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'Smells like teen spirit',
-    artist: 'Nirvana',
-    block: 'rock',
-    gerne: 'grunge',
-  },
-  {
-    key: '2',
-    name: 'People help the people',
-    artist: 'Birdy',
-    block: 'rock',
-    gerne: 'indie rock',
-  },
-  {
-    key: '3',
-    name: 'Heather',
-    artist: 'Connan Gray',
-    block: 'pop',
-    gerne: 'folk',
-  },
-  {
-    key: '4',
-    name: 'Come as you are',
-    artist: 'Nirvana',
-    block: 'rock',
-    gerne: 'grunge',
-  },
-];
-
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -95,45 +92,13 @@ const tailLayout = {
 
 const SongManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [form] = Form.useForm();
+  const [dataSong, setDataSong] = useState([]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  const handleEdit = (record: DataType) => {
-    // Open the edit form for the corresponding record
-    console.log(`Editing record with key ${record.key}`);
-  };
-
-  const handleDelete = (key: string) => {
-    // Delete the corresponding record
-    console.log(`Deleting record with key ${key}`);
-  };
-
-  const showDeleteConfirm = (record: DataType) => {
-    confirm({
-      title: `Are you sure you want to delete ${record.name}?`,
-      icon: <ExclamationCircleOutlined />,
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        handleDelete(record.key);
-      },
-      onCancel() {
-        console.log('Cancel');
-      },
-    });
-  };
-
-  const filteredData = data.filter((item) => {
-    return (
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ||  item.key.toLowerCase().includes(searchTerm.toLowerCase())
-      ||  item.artist.toLowerCase().includes(searchTerm.toLowerCase())
-      ||  item.block.toLowerCase().includes(searchTerm.toLowerCase())
-      ||  item.gerne.toLowerCase().includes(searchTerm.toLowerCase()))
-  });
 
   const handleAdd = () => {
     // Implement logic to open modal or form for creating a new song
@@ -146,8 +111,29 @@ const SongManager: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
+  const getSongInfo = async () => {
+    try {
+      const data = await CRUDService.getAllService('http://localhost:3000/song/get-all');
+      console.log("data",data)
+      setDataSong(data.songModels);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getSongInfo();
+  }, []);
+
+  const handleOk = async() => {
+    try {
+      const values = await form.validateFields();
+      console.log(values);
+      await CRUDService.saveService('http://localhost:3000/song/add-song', values);
+    } catch (error) {
+      console.error(error);
+    }
+    handleCancel();
   };
 
   const handleCancel = () => {
@@ -162,7 +148,7 @@ const SongManager: React.FC = () => {
         ADD
       </Button>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-      <Form
+      <Form form={form}
       {...layout}
       style={{ maxWidth: 600 }}
     >
@@ -178,7 +164,7 @@ const SongManager: React.FC = () => {
       <Form.Item name="block" label="Block" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="gerne" label="Gerne" rules={[{ required: true }]}>
+      <Form.Item name="genre" label="Gerne" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item {...tailLayout}>
@@ -186,7 +172,7 @@ const SongManager: React.FC = () => {
     </Form>
       </Modal>
       </div>
-      <Table columns={columns} dataSource={filteredData} />
+      <Table dataSource={dataSong} columns={columns} />
     </>
   );
 };

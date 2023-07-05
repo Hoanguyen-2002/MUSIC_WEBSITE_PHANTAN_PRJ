@@ -1,7 +1,7 @@
 import { request } from '@umijs/max';
 
 class CRUDService {
-  saveService = async (api: String, body: any, options?: { [key: string]: any }) => {
+  saveService = async (api: string, body: any, options?: { [key: string]: any }) => {
     return request(`${api}`, {
       method: 'POST',
       headers: {

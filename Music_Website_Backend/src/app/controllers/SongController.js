@@ -55,7 +55,7 @@ class songController {
             artist: String(songData?.artist),
             duration: String(songData?.duration),
             block: String(songData?.block),
-            hasVideo: String(songData?.hasVideo),
+            hasVideo: false,
             videoLink: String(songData?.videoLink),
             name: String(songData?.name),
             genre: String(songData?.genre),
@@ -63,16 +63,16 @@ class songController {
         console.log(newSong);
         newSong
             .save()
-            .then((test) => {
-                console.log('Added new test case to database:', test);
+            .then((song) => {
+                console.log('Added new song to database:', song);
                 res.status(201).json({
-                    message: 'Test case added successfully',
-                    test,
+                    message: 'song added successfully',
+                    song,
                 });
             })
             .catch((err) => {
-                console.error('Error adding test case to database:', err);
-                res.status(500).json({ error: 'Failed to add test case' });
+                console.error('Error adding song to database:', err);
+                res.status(500).json({ error: 'Failed to add song' });
             });
     }
     deleteSong(req, res, next) {
