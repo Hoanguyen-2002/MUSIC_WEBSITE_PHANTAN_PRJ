@@ -3,6 +3,7 @@ import { Space, Table, Tag, Input, Button, Modal, Form, message } from 'antd';
 import Icon, { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import CRUDService from '@/services/CRUDService';
+import EditSong from './EditSong';
 
 interface DataType {
   name: string;
@@ -51,7 +52,9 @@ const SongManager: React.FC = () => {
     });
   };
   
-
+  const showEdit = () => {
+    return (<EditSong/>);
+  }
   const columns: ColumnsType<DataType> = [
     {
       title: 'id',
@@ -86,7 +89,7 @@ const SongManager: React.FC = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
+          <Button type="primary" onClick={() => showEdit()}>Edit</Button>
           <Button type="primary" danger onClick={() => handleDelete(record._id)}>Delete</Button>
         </Space>
       ),
@@ -149,7 +152,7 @@ const SongManager: React.FC = () => {
       <Button type="primary" onClick={showModal} style={{ marginLeft: 100, marginBottom: 16 }}>
         ADD
       </Button>
-      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Thêm bài hát" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
       <Form form={form}
       {...layout}
       style={{ maxWidth: 600 }}
