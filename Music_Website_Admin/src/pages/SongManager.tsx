@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
+import Icon, { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import CRUDService from '@/services/CRUDService';
 
 interface DataType {
-  key: string;
   name: string;
   artist: string;
   block: string;
@@ -42,11 +42,6 @@ const showDeleteConfirm = (record: DataType) => {
 };
 
 const columns: ColumnsType<DataType> = [
-  {
-    title: 'Key',
-    dataIndex: '_id',
-    key: 'key',
-  },
   {
     title: 'Name',
     dataIndex: 'name',
@@ -90,6 +85,32 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
+const handleEdit = (record: DataType) => {
+  // Open the edit form for the corresponding record
+  console.log(`Editing record with key ${record.name}`);
+};
+
+const handleDelete = (key: string) => {
+  // Delete the corresponding record
+  console.log(`Deleting record with key ${key}`);
+};
+
+const showDeleteConfirm = (record: DataType) => {
+  confirm({
+    title: `Are you sure you want to delete ${record.name}?`,
+    icon: <ExclamationCircleOutlined />,
+    okText: 'Yes',
+    okType: 'danger',
+    cancelText: 'No',
+    onOk() {
+      handleDelete(record.name);
+    },
+    onCancel() {
+      console.log('Cancel');
+    },
+  });
+};
+
 const SongManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [form] = Form.useForm();
@@ -98,7 +119,6 @@ const SongManager: React.FC = () => {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
-
 
   const handleAdd = () => {
     // Implement logic to open modal or form for creating a new song
@@ -152,9 +172,6 @@ const SongManager: React.FC = () => {
       {...layout}
       style={{ maxWidth: 600 }}
     >
-      <Form.Item name="key" label="Key" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
       <Form.Item name="name" label="Name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
