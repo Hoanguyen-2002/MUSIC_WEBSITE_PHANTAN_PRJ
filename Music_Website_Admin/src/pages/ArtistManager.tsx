@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Space, Table, Tag, Input, Button, Modal, Form, message } from 'antd';
 import Icon, { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
+import CRUDService from '@/services/CRUDService';
 
 interface DataType {
   name: string;
@@ -12,67 +13,6 @@ interface DataType {
 
 const { Search } = Input;
 const { confirm } = Modal;
-
-const columns: ColumnsType<DataType> = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Link',
-    dataIndex: 'link',
-    key: 'link',
-  },
-  {
-    title: 'Cover',
-    dataIndex: 'cover',
-    key: 'cover',
-  },
-  {
-    title: 'Thumbnail',
-    dataIndex: 'thumbnail',
-    key: 'thumbnail',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
-        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Delete</Button>
-      </Space>
-    ),
-  },
-];
-
-const data: DataType[] = [
-  {
-    name: 'Nirvana',
-    link: '1',
-    cover: '1',
-    thumbnail: '1',
-  },
-  {
-    name: 'Birdy',
-    link: '1',
-    cover: '1',
-    thumbnail: '1',
-  },
-  {
-    name: 'Conan Gray',
-    link: '1',
-    cover: '1',
-    thumbnail: '1',
-  },
-  {
-    name: 'Coldplay',
-    link: '1',
-    cover: '1',
-    thumbnail: '1',
-  },
-];
 
 const layout = {
   labelCol: { span: 8 },
@@ -110,36 +50,110 @@ const showDeleteConfirm = (record: DataType) => {
 };
 
 const ArtistManager: React.FC = () => {
+  const [form] = Form.useForm();
   const [searchTerm, setSearchTerm] = useState("");
+  const [dataArtist, setDataArtist] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = data.filter((item) => {
-    return (
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()));
-  });
-
-  const handleAdd = () => {
-    // Implement logic to open modal or form for creating a new song
-    console.log("Add button clicked");
+  const handleDelete = (id: String) => {
+    confirm({
+      title: `Bạn muốn xóa ca sĩ này?`,
+      icon: <ExclamationCircleOutlined />,
+      cancelText: 'Hủy',
+      okText: 'Xóa',
+      okType: 'danger',
+      onOk() {
+        fetch(`http://localhost:3000/artist/delete/${id}`, {
+          method: 'DELETE',
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Lỗi khi xóa');
+            }
+            message.success('Xóa thành công');
+            getArtistInfo();
+          })
+          .catch((error) => {
+            message.error(error.message);
+          });
+      },
+    });
   };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
+  const handleOk = async() => {
+    try {
+      const values = await form.validateFields();
+      console.log(values);
+      await CRUDService.saveService('http://localhost:3000/artist/add-artist', values);
+    } catch (error) {
+      console.error(error);
+    }
+    handleCancel();
   };
+
+  const getArtistInfo = async () => {
+    try {
+      const data = await CRUDService.getAllService('http://localhost:3000/artist/get-all');
+      console.log("data",data)
+      setDataArtist(data.artistModels);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getArtistInfo();
+  }, []);
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  const columns: ColumnsType<DataType> = [
+    {
+      title: 'id',
+      dataIndex: '_id',
+      key: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Link',
+      dataIndex: 'link',
+      key: 'link',
+    },
+    {
+      title: 'Cover',
+      dataIndex: 'cover',
+      key: 'cover',
+    },
+    {
+      title: 'Thumbnail',
+      dataIndex: 'thumbnail',
+      key: 'thumbnail',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
+          <Button type="primary" danger onClick={() => handleDelete(record._id)}>Delete</Button>
+        </Space>
+      ),
+    },
+  ];
   return (
     <>
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -148,7 +162,7 @@ const ArtistManager: React.FC = () => {
         ADD
       </Button>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-      <Form
+      <Form form={form}
       {...layout}
       style={{ maxWidth: 600 }}
     >
@@ -167,7 +181,7 @@ const ArtistManager: React.FC = () => {
     </Form>
       </Modal>
       </div>
-      <Table columns={columns} dataSource={filteredData} />
+      <Table columns={columns} dataSource={dataArtist} />
     </>
   );
 };

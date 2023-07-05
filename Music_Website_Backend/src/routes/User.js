@@ -4,6 +4,7 @@ const userController = require('../app/controllers/UserController');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
+router.get('/get-all', userController.getAllUser);
 router.post('/user-infor', userController.findUser);
 router.post('/current-user', userController.findUserByToken);
 router.post('/login', userController.login);
