@@ -51,27 +51,16 @@ export default [
   //   ],
   // },
   {
-    path: '/user-manager',
+    path: '/user/manager-user',
     name: 'Quản lý người dùng',
     icon: '👤',
-    access: 'canAdmin',
-    routes: [
-      {
-        path: '/user',
-        redirect: '/user/sub-page',
-      },
-      {
-        path: '/user/user-activity',
-        name: 'Hoạt động người dùng',
-        component: './Chart',
-      },
-      {
-        path: '/user/user-manager',
-        name: 'Quản lý người dùng',
-        component: './UserManager',
-      },
-    ],
-
+    component: './UserManager',
+  },
+  {
+    path: '/user/user-activity/:id',
+    name: 'Hoạt động người dùng',
+    component: './Chart',
+    hideInMenu: true,
   },
   {
     path: '/artist-manager',

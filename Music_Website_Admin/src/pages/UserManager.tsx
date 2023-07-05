@@ -25,7 +25,7 @@ const tailLayout = {
 
 const handleNameClick = (record: DataType) => {
   console.log(`Name clicked for record with key ${record.name}`);
-  window.location.href = 'http://localhost:8000/user/user-detail';
+  window.location.href = `http://localhost:8000/user/user-activity/${record._id}`;
 };
 
 const UserManager: React.FC = () => {

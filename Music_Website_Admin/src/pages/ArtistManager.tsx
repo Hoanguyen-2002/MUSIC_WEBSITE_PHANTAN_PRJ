@@ -93,6 +93,7 @@ const ArtistManager: React.FC = () => {
       const values = await form.validateFields();
       console.log(values);
       await CRUDService.saveService('http://localhost:3000/artist/add-artist', values);
+      getArtistInfo();
     } catch (error) {
       console.error(error);
     }
@@ -132,6 +133,7 @@ const ArtistManager: React.FC = () => {
       title: 'Link',
       dataIndex: 'link',
       key: 'link',
+      render: (text) => <a href={text}>Chi tiết</a>,
     },
     {
       title: 'Cover',
@@ -142,6 +144,7 @@ const ArtistManager: React.FC = () => {
       title: 'Thumbnail',
       dataIndex: 'thumbnail',
       key: 'thumbnail',
+      render: (text) => <a href={text}>link</a>,
     },
     {
       title: 'Action',
