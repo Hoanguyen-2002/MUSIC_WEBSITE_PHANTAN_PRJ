@@ -4,7 +4,6 @@ import Icon, { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
-  key: string;
   name: string;
   artist: string;
   block: string;
@@ -15,11 +14,6 @@ const { Search } = Input;
 const { confirm } = Modal;
 
 const columns: ColumnsType<DataType> = [
-  {
-    title: 'Key',
-    dataIndex: 'key',
-    key: 'key',
-  },
   {
     title: 'Name',
     dataIndex: 'name',
@@ -56,28 +50,24 @@ const columns: ColumnsType<DataType> = [
 
 const data: DataType[] = [
   {
-    key: '1',
     name: 'Smells like teen spirit',
     artist: 'Nirvana',
     block: 'rock',
     gerne: 'grunge',
   },
   {
-    key: '2',
     name: 'People help the people',
     artist: 'Birdy',
     block: 'rock',
     gerne: 'indie rock',
   },
   {
-    key: '3',
     name: 'Heather',
     artist: 'Connan Gray',
     block: 'pop',
     gerne: 'folk',
   },
   {
-    key: '4',
     name: 'Come as you are',
     artist: 'Nirvana',
     block: 'rock',
@@ -120,11 +110,6 @@ const showDeleteConfirm = (record: DataType) => {
   });
 };
 
-const handleAdd = () => {
-  // Implement logic to open modal or form for creating a new song
-  console.log("Add button clicked");
-};
-
 const SongManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -140,6 +125,11 @@ const SongManager: React.FC = () => {
       ||  item.block.toLowerCase().includes(searchTerm.toLowerCase())
       ||  item.gerne.toLowerCase().includes(searchTerm.toLowerCase()))
   });
+
+  const handleAdd = () => {
+    // Implement logic to open modal or form for creating a new song
+    console.log("Add button clicked");
+  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -167,9 +157,6 @@ const SongManager: React.FC = () => {
       {...layout}
       style={{ maxWidth: 600 }}
     >
-      <Form.Item name="key" label="Key" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
       <Form.Item name="name" label="Name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>

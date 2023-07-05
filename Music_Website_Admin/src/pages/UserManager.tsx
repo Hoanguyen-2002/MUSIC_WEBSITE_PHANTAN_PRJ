@@ -21,7 +21,11 @@ const columns: ColumnsType<DataType> = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: (text) => <a>{text}</a>,
+    render: (_, record) => (
+      <Button type="link" onClick={() => handleNameClick(record)}>
+        {record.name}
+      </Button>
+    )
   },
   {
     title: 'Email',
@@ -132,6 +136,11 @@ const showDeleteConfirm = (record: DataType) => {
       console.log('Cancel');
     },
   });
+};
+
+const handleNameClick = (record: DataType) => {
+  console.log(`Name clicked for record with key ${record.key}`);
+  window.location.href = 'http://localhost:8000/user/add-user';
 };
 
 const UserManager: React.FC = () => {
