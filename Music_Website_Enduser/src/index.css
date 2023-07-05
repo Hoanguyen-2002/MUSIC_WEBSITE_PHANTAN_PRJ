@@ -56,3 +56,65 @@
 .custom-icon.fill-color{
     color: red;
 }
+
+.auth-form-container {
+  background-color: rgba(255, 255, 255, 0.8); /* Màu nền trong suốt */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.login-header{
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+
+}
+
+.register-btn {
+  padding: 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.link-btn {
+  background-color: transparent;
+  color: #000;
+  border: none;
+  cursor: pointer;
+}
+
+.login-btn{
+  padding-right: 620px;
+  padding: 10px;
+  background-color: gray;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  outline: none; /* Thêm dòng này để loại bỏ đường viền khi được nhấn */
+}
+

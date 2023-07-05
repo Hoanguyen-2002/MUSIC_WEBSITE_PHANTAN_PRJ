@@ -28,9 +28,31 @@ export default [
     icon: 'smile',
     component: './Welcome',
   },
+  // {
+  //   path: '/user',
+  //   name: 'Người dùng',
+  //   icon: '👤',
+  //   access: 'canAdmin',
+  //   routes: [
+  //     {
+  //       path: '/user',
+  //       redirect: '/user/sub-page',
+  //     },
+  //     {
+  //       path: '/user/user-manager',
+  //       name: 'Quản lý người dùng',
+  //       component: './UserManager',
+  //     },
+  //     {
+  //       path: '/user/user-detail',
+  //       name: 'Chi tiết người dùng',
+  //       component: './UserDetail',
+  //     },
+  //   ],
+  // },
   {
-    path: '/user',
-    name: 'Người dùng',
+    path: '/user-manager',
+    name: 'Quản lý người dùng',
     icon: '👤',
     access: 'canAdmin',
     routes: [
@@ -49,6 +71,7 @@ export default [
         component: './UserManager',
       },
     ],
+
   },
   {
     path: '/artist-manager',
@@ -62,12 +85,6 @@ export default [
     icon: '🎶',
     component: './SongManager',
   },
-  // {
-  // //   name: 'list.table-list',
-  // //   icon: 'table',
-  // //   path: '/list',
-  // //   component: './TableList',
-  // // },
   {
     path: '/',
     redirect: '/welcome',
