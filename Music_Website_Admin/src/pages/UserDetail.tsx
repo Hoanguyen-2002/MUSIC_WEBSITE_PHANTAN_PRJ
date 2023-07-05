@@ -1,6 +1,14 @@
 import React from 'react';
 import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
 import type { FormInstance } from 'antd/es/form';
+import type { ColumnsType } from 'antd/es/table';
+
+interface DataType {
+  name: string;
+  artist: string;
+  block: string;
+  gerne: string;
+}
 
 const layout = {
   labelCol: { span: 8 },
@@ -12,11 +20,6 @@ const tailLayout = {
 };
 
 const columns: ColumnsType<DataType> = [
-  {
-    title: 'Key',
-    dataIndex: 'key',
-    key: 'key',
-  },
   {
     title: 'Name',
     dataIndex: 'name',
@@ -39,42 +42,28 @@ const columns: ColumnsType<DataType> = [
     dataIndex: 'gerne',
     key: 'gerne',
   },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <Button type="primary" onClick={() => handleEdit(record)}>Edit</Button>
-        <Button type="primary" danger onClick={() => showDeleteConfirm(record)}>Delete</Button>
-      </Space>
-    ),
-  },
 ];
 
 const data: DataType[] = [
   {
-    key: '1',
     name: 'Smells like teen spirit',
     artist: 'Nirvana',
     block: 'rock',
     gerne: 'grunge',
   },
   {
-    key: '2',
     name: 'People help the people',
     artist: 'Birdy',
     block: 'rock',
     gerne: 'indie rock',
   },
   {
-    key: '3',
     name: 'Heather',
     artist: 'Connan Gray',
     block: 'pop',
     gerne: 'folk',
   },
   {
-    key: '4',
     name: 'Come as you are',
     artist: 'Nirvana',
     block: 'rock',
@@ -82,7 +71,7 @@ const data: DataType[] = [
   },
 ];
 
-const UserInfo: React.FC = () => {
+const UserDetail: React.FC = () => {
   const formRef = React.useRef<FormInstance>(null);
 
   const onFinish = (values: any) => {
@@ -96,19 +85,19 @@ const UserInfo: React.FC = () => {
   return (
     <>
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: 15 }}>
-      Bang 1
+      Danh sách bài hát yêu thích
       </div>
       <Table columns={columns} dataSource={data} />
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: 15 }}>
-      Bang 2
+      Danh sách nghệ sĩ yêu thích
       </div>
       <Table columns={columns} dataSource={data} />
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: 15 }}>
-      Bang 3
+      Danh sách playlist yêu thích
       </div>
       <Table columns={columns} dataSource={data} />
     </>
   );
 };
 
-export default UserInfo;
+export default UserDetail;

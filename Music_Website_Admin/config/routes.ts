@@ -44,9 +44,9 @@ export default [
         component: './UserManager',
       },
       {
-        path: '/user/add-user',
-        name: 'Thêm người dùng',
-        component: './UserAdd',
+        path: '/user/user-detail',
+        name: 'Chi tiết người dùng',
+        component: './UserDetail',
       },
     ],
   },
