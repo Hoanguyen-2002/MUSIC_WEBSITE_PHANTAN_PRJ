@@ -86,7 +86,7 @@ const tailLayout = {
 
 const handleEdit = (record: DataType) => {
   // Open the edit form for the corresponding record
-  console.log(`Editing record with key ${record.key}`);
+  console.log(`Editing record with key ${record.name}`);
 };
 
 const handleDelete = (key: string) => {
@@ -102,7 +102,7 @@ const showDeleteConfirm = (record: DataType) => {
     okType: 'danger',
     cancelText: 'No',
     onOk() {
-      handleDelete(record.key);
+      handleDelete(record.name);
     },
     onCancel() {
       console.log('Cancel');
@@ -120,7 +120,6 @@ const SongManager: React.FC = () => {
   const filteredData = data.filter((item) => {
     return (
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ||  item.key.toLowerCase().includes(searchTerm.toLowerCase())
       ||  item.artist.toLowerCase().includes(searchTerm.toLowerCase())
       ||  item.block.toLowerCase().includes(searchTerm.toLowerCase())
       ||  item.gerne.toLowerCase().includes(searchTerm.toLowerCase()))

@@ -4,7 +4,6 @@ import Icon, { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
-  key: string;
   name: string;
   email: string;
   password: string;
@@ -66,7 +65,6 @@ const columns: ColumnsType<DataType> = [
 
 const data: DataType[] = [
   {
-    key: '1',
     name: 'Vu Duc Duy',
     email: 'duy.vd207668@sis.hust.edu.vn',
     password: '123',
@@ -75,7 +73,6 @@ const data: DataType[] = [
     phone: '0912345123'
   },
   {
-    key: '2',
     name: 'Tran Quang Thang',
     email: 'thang.tq207701@sis.hust.edu.vn',
     password: '123',
@@ -84,7 +81,6 @@ const data: DataType[] = [
     phone: '0965287395'
   },
   {
-    key: '3',
     name: 'Nguyen Viet Hoa',
     email: 'hoa.nv207673@sis.hust.edu.vn',
     password: '123',
@@ -93,7 +89,6 @@ const data: DataType[] = [
     phone: '0917822851',
   },
   {
-    key: '4',
     name: 'Bui Trung Kien',
     email: 'kien.bt207710@sis.hust.edu.vn',
     password: '123',
@@ -114,7 +109,7 @@ const tailLayout = {
 
 const handleEdit = (record: DataType) => {
   // Open the edit form for the corresponding record
-  console.log(`Editing record with key ${record.key}`);
+  console.log(`Editing record with key ${record.name}`);
 };
 
 const handleDelete = (key: string) => {
@@ -130,7 +125,7 @@ const showDeleteConfirm = (record: DataType) => {
     okType: 'danger',
     cancelText: 'No',
     onOk() {
-      handleDelete(record.key);
+      handleDelete(record.name);
     },
     onCancel() {
       console.log('Cancel');
@@ -139,7 +134,7 @@ const showDeleteConfirm = (record: DataType) => {
 };
 
 const handleNameClick = (record: DataType) => {
-  console.log(`Name clicked for record with key ${record.key}`);
+  console.log(`Name clicked for record with key ${record.name}`);
   window.location.href = 'http://localhost:8000/user/add-user';
 };
 
@@ -153,7 +148,6 @@ const UserManager: React.FC = () => {
   const filteredData = data.filter((item) => {
     return (
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ||  item.key.toLowerCase().includes(searchTerm.toLowerCase())
       ||  item.email.toLowerCase().includes(searchTerm.toLowerCase())
       ||  item.password.toLowerCase().includes(searchTerm.toLowerCase())
       ||  item.access.toLowerCase().includes(searchTerm.toLowerCase())
@@ -191,9 +185,6 @@ const UserManager: React.FC = () => {
       {...layout}
       style={{ maxWidth: 600 }}
     >
-      <Form.Item name="key" label="Key" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
       <Form.Item name="name" label="Name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
