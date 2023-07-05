@@ -24,7 +24,7 @@ jobs:
 
 - name: Run tests
   run: |
-    npm 
+    npm run dev
     # hoặc sử dụng yarn
     # yarn test
 

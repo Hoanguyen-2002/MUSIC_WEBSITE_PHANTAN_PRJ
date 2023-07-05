@@ -38,7 +38,10 @@ const SongCard = ({song,isPlaying,activeSong,data,i}) => {
       <p className='text-sm text-gray-300 mt-1'>
         <a href={song.artists ? `/artists/${song?.artists[0]?.adamid}` : '/top-artists'}>{song.subtitle}</a>
       </p>
-      <span class="favorite-icon">&#9825;</span>
+      <button>
+            <FontAwesomeIcon icon={faHeart} size="2x" className="custom-icon" onClick={handleHeartClick}
+          style={{ color: isClicked ? 'red' : 'white' }}/>   
+      </button>
     </div>
   </div>
 )};

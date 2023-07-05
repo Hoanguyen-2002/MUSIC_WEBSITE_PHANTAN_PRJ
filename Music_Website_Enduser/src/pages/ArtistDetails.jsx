@@ -21,8 +21,8 @@ const ArtistDetails = () => {
     console.log(data);
   
 
-    if(isfetchingArtistDetails || isFetchingRelatedSongs || isfetchingSongDetails) return <Loader title={'Loading artist details'}/>
-    if(errorAD && error) return <Error/>
+    if(isfetchingArtistDetails) return <Loader title={'Đang tải thông tin Nghệ Sĩ'}/>
+    if(errorAD) return <Error/>
 
     const handlePauseClick = () => {
       dispatch(playPause(false));
