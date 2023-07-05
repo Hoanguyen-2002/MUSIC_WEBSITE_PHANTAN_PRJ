@@ -39,14 +39,14 @@ export default [
         redirect: '/user/sub-page',
       },
       {
+        path: '/user/user-activity',
+        name: 'Hoạt động người dùng',
+        component: './Chart',
+      },
+      {
         path: '/user/user-manager',
         name: 'Quản lý người dùng',
         component: './UserManager',
-      },
-      {
-        path: '/user/add-user',
-        name: 'Thêm người dùng',
-        component: './UserAdd',
       },
     ],
   },

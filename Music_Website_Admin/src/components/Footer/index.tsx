@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const intl = useIntl();
   const defaultMessage = intl.formatMessage({
     id: 'app.copyright.produced',
-    defaultMessage: '蚂蚁集团体验技术部出品',
+    defaultMessage: '',
   });
 
   const currentYear = new Date().getFullYear();
@@ -17,14 +17,7 @@ const Footer: React.FC = () => {
       style={{
         background: 'none',
       }}
-      copyright={`${currentYear} ${defaultMessage}`}
       links={[
-        // {
-        //   key: 'Admin page',
-        //   title: 'Admin page',
-        //   href: 'https://pro.ant.design',
-        //   blankTarget: true,
-        // },
         {
           key: 'github',
           title: <GithubOutlined />,
@@ -32,7 +25,7 @@ const Footer: React.FC = () => {
           blankTarget: true,
         },
         {
-          key: 'Ant Design',
+          key: 'Github Music Web',
           title: 'Github Music Web',
           href: 'https://github.com/Hoanguyen-2002/MUSIC_WEBSITE_PHANTAN_PRJ',
           blankTarget: true,
