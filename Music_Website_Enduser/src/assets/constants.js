@@ -1,4 +1,4 @@
-import { HiOutlineHashtag, HiOutlineHome, HiMusicNote, HiOutlineUserGroup } from 'react-icons/hi';
+import { HiOutlineHashtag, HiOutlineHome, HiMusicNote, HiOutlineUserGroup,HiOutlineUserCircle ,HiQuestionMarkCircle} from 'react-icons/hi';
 
 export const genres = [
   { title: 'Pop', value: 'POP' },
@@ -22,4 +22,8 @@ export const links = [
   { name: 'Playlist', to: '/play-list', icon: HiMusicNote },
   { name: 'Top Artists', to: '/top-artists', icon: HiOutlineUserGroup },
   { name: 'Top Charts', to: '/top-charts', icon: HiOutlineHashtag },
+  { name: 'Log In', to: '/log-in', icon: HiOutlineUserCircle },
+  { name: 'Register', to: '/register', icon:  HiQuestionMarkCircle},
+  
+
 ];
