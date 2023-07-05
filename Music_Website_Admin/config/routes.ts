@@ -54,7 +54,24 @@ export default [
     path: '/user-manager',
     name: 'Quản lý người dùng',
     icon: '👤',
-    component: './UserManager',
+    access: 'canAdmin',
+    routes: [
+      {
+        path: '/user',
+        redirect: '/user/sub-page',
+      },
+      {
+        path: '/user/user-activity',
+        name: 'Hoạt động người dùng',
+        component: './Chart',
+      },
+      {
+        path: '/user/user-manager',
+        name: 'Quản lý người dùng',
+        component: './UserManager',
+      },
+    ],
+
   },
   {
     path: '/artist-manager',
