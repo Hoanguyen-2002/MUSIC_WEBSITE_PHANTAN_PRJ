@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
       style={{
         background: 'none',
       }}
-      copyright={`${currentYear} ${defaultMessage}`}
+      copyright={`${currentYear} Created by group 3`}
       links={[
         // {
         //   key: 'Admin page',

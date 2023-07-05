@@ -22,7 +22,7 @@ export const Question = () => {
         height: 26,
       }}
       onClick={() => {
-        window.open('https://pro.ant.design/docs/getting-started');
+        window.open('https://github.com/Hoanguyen-2002/MUSIC_WEBSITE_PHANTAN_PRJ/blob/main/README.md');
       }}
     >
       <QuestionCircleOutlined />
