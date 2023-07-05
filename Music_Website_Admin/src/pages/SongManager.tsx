@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
+import Icon, { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
@@ -93,37 +94,42 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
+const handleEdit = (record: DataType) => {
+  // Open the edit form for the corresponding record
+  console.log(`Editing record with key ${record.key}`);
+};
+
+const handleDelete = (key: string) => {
+  // Delete the corresponding record
+  console.log(`Deleting record with key ${key}`);
+};
+
+const showDeleteConfirm = (record: DataType) => {
+  confirm({
+    title: `Are you sure you want to delete ${record.name}?`,
+    icon: <ExclamationCircleOutlined />,
+    okText: 'Yes',
+    okType: 'danger',
+    cancelText: 'No',
+    onOk() {
+      handleDelete(record.key);
+    },
+    onCancel() {
+      console.log('Cancel');
+    },
+  });
+};
+
+const handleAdd = () => {
+  // Implement logic to open modal or form for creating a new song
+  console.log("Add button clicked");
+};
+
 const SongManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-  };
-
-  const handleEdit = (record: DataType) => {
-    // Open the edit form for the corresponding record
-    console.log(`Editing record with key ${record.key}`);
-  };
-
-  const handleDelete = (key: string) => {
-    // Delete the corresponding record
-    console.log(`Deleting record with key ${key}`);
-  };
-
-  const showDeleteConfirm = (record: DataType) => {
-    confirm({
-      title: `Are you sure you want to delete ${record.name}?`,
-      icon: <ExclamationCircleOutlined />,
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        handleDelete(record.key);
-      },
-      onCancel() {
-        console.log('Cancel');
-      },
-    });
   };
 
   const filteredData = data.filter((item) => {
@@ -134,11 +140,6 @@ const SongManager: React.FC = () => {
       ||  item.block.toLowerCase().includes(searchTerm.toLowerCase())
       ||  item.gerne.toLowerCase().includes(searchTerm.toLowerCase()))
   });
-
-  const handleAdd = () => {
-    // Implement logic to open modal or form for creating a new song
-    console.log("Add button clicked");
-  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
+import Icon, { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
@@ -8,6 +9,7 @@ interface DataType {
   email: string;
   password: string;
   access: string;
+  detail: string;
   phone: string;
 }
 
@@ -37,6 +39,11 @@ const columns: ColumnsType<DataType> = [
     key: 'access',
   },
   {
+    title: 'Detail',
+    dataIndex: 'detail',
+    key: 'detail',
+  },
+  {
     title: 'Phone',
     dataIndex: 'phone',
     key: 'phone',
@@ -60,6 +67,7 @@ const data: DataType[] = [
     email: 'duy.vd207668@sis.hust.edu.vn',
     password: '123',
     access: '1',
+    detail: 'abc',
     phone: '0912345123'
   },
   {
@@ -68,6 +76,7 @@ const data: DataType[] = [
     email: 'thang.tq207701@sis.hust.edu.vn',
     password: '123',
     access: '1',
+    detail: 'abc',
     phone: '0965287395'
   },
   {
@@ -76,6 +85,7 @@ const data: DataType[] = [
     email: 'hoa.nv207673@sis.hust.edu.vn',
     password: '123',
     access: '1',
+    detail: 'abc',
     phone: '0917822851',
   },
   {
@@ -84,6 +94,7 @@ const data: DataType[] = [
     email: 'kien.bt207710@sis.hust.edu.vn',
     password: '123',
     access: '1',
+    detail: 'abc',
     phone: '0911198640',
   },
 ];
@@ -97,37 +108,37 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
+const handleEdit = (record: DataType) => {
+  // Open the edit form for the corresponding record
+  console.log(`Editing record with key ${record.key}`);
+};
+
+const handleDelete = (key: string) => {
+  // Delete the corresponding record
+  console.log(`Deleting record with key ${key}`);
+};
+
+const showDeleteConfirm = (record: DataType) => {
+  confirm({
+    title: `Are you sure you want to delete ${record.name}?`,
+    icon: <ExclamationCircleOutlined />,
+    okText: 'Yes',
+    okType: 'danger',
+    cancelText: 'No',
+    onOk() {
+      handleDelete(record.key);
+    },
+    onCancel() {
+      console.log('Cancel');
+    },
+  });
+};
+
 const UserManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-  };
-
-  const handleEdit = (record: DataType) => {
-    // Open the edit form for the corresponding record
-    //console.log(`Editing record with key ${record.key}`);
-  };
-
-  const handleDelete = (key: string) => {
-    // Delete the corresponding record
-    //console.log(`Deleting record with key ${key}`);
-  };
-
-  const showDeleteConfirm = (record: DataType) => {
-    // confirm({
-    //   title: `Are you sure you want to delete ${record.name}?`,
-    //   icon: <ExclamationCircleOutlined />,
-    //   okText: 'Yes',
-    //   okType: 'danger',
-    //   cancelText: 'No',
-    //   onOk() {
-    //     handleDelete(record.key);
-    //   },
-    //   onCancel() {
-    //     console.log('Cancel');
-    //   },
-    // });
   };
 
   const filteredData = data.filter((item) => {
@@ -184,6 +195,9 @@ const UserManager: React.FC = () => {
         <Input />
       </Form.Item>
       <Form.Item name="access" label="Access" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name="detail" label="Detail" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name="phone" label="Phone" rules={[{ required: true }]}>
