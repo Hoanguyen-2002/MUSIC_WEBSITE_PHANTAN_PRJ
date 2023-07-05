@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Space, Table, Tag, Input, Button, Modal, Form } from 'antd';
+import Icon, { ExclamationCircleOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 interface DataType {
-  key: string;
   name: string;
   link: string;
   cover: string;
@@ -14,11 +14,6 @@ const { Search } = Input;
 const { confirm } = Modal;
 
 const columns: ColumnsType<DataType> = [
-  {
-    title: 'Key',
-    dataIndex: 'key',
-    key: 'key',
-  },
   {
     title: 'Name',
     dataIndex: 'name',
@@ -54,28 +49,24 @@ const columns: ColumnsType<DataType> = [
 
 const data: DataType[] = [
   {
-    key: '1',
     name: 'Nirvana',
     link: '1',
     cover: '1',
     thumbnail: '1',
   },
   {
-    key: '2',
     name: 'Birdy',
     link: '1',
     cover: '1',
     thumbnail: '1',
   },
   {
-    key: '3',
     name: 'Conan Gray',
     link: '1',
     cover: '1',
     thumbnail: '1',
   },
   {
-    key: '4',
     name: 'Coldplay',
     link: '1',
     cover: '1',
@@ -92,6 +83,32 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
+const handleEdit = (record: DataType) => {
+  // Open the edit form for the corresponding record
+  console.log(`Editing record with key ${record.name}`);
+};
+
+const handleDelete = (key: string) => {
+  // Delete the corresponding record
+  console.log(`Deleting record with key ${key}`);
+};
+
+const showDeleteConfirm = (record: DataType) => {
+  confirm({
+    title: `Are you sure you want to delete ${record.name}?`,
+    icon: <ExclamationCircleOutlined />,
+    okText: 'Yes',
+    okType: 'danger',
+    cancelText: 'No',
+    onOk() {
+      handleDelete(record.name);
+    },
+    onCancel() {
+      console.log('Cancel');
+    },
+  });
+};
+
 const ArtistManager: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -99,36 +116,9 @@ const ArtistManager: React.FC = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleEdit = (record: DataType) => {
-    // Open the edit form for the corresponding record
-    console.log(`Editing record with key ${record.key}`);
-  };
-
-  const handleDelete = (key: string) => {
-    // Delete the corresponding record
-    console.log(`Deleting record with key ${key}`);
-  };
-
-  const showDeleteConfirm = (record: DataType) => {
-    confirm({
-      title: `Are you sure you want to delete ${record.name}?`,
-      icon: <ExclamationOutlined />,
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        handleDelete(record.key);
-      },
-      onCancel() {
-        console.log('Cancel');
-      },
-    });
-  };
-
   const filteredData = data.filter((item) => {
     return (
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ||  item.key.toLowerCase().includes(searchTerm.toLowerCase()));
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()));
   });
 
   const handleAdd = () => {
@@ -162,9 +152,6 @@ const ArtistManager: React.FC = () => {
       {...layout}
       style={{ maxWidth: 600 }}
     >
-      <Form.Item name="key" label="Key" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
       <Form.Item name="name" label="Name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
