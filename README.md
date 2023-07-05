@@ -83,10 +83,10 @@ Build Docker image
 
 <h2>2. Phân chia công việc</h2>
 
-1. Trần Quang Thắng (tester and coder)
-2. Nguyễn Việt Hòa (owner and coder)
-3. Vũ Đức Duy (coder)
-4. Bùi Trung Kiên (coder and leader)
+1. Trần Quang Thắng (Code phần giao diện client viết báo cáo và hoàn thiện thiết kế hệ thống) --- role: Thành viên
+2. Nguyễn Việt Hòa (Code và thiết kế phần giao diện client) --- role: Thành viên
+3. Vũ Đức Duy (Code, thiết kế và triển khai phần giao diện admin page) --- role: Thành viên
+4. Bùi Trung Kiên (Hỗ trợ triển khai và code phần giao diện admin page, code các service, phụ trách ghép backend vs frontend API, thiết kế cơ sở dũ liệu và phần backend) --- role: Leader
 
 <h2>3. Cài đặt và triển khai CI/CD sử dụng jenkin và docker</h2>
 
