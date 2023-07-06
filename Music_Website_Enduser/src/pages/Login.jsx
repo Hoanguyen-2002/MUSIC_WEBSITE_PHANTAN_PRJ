@@ -23,12 +23,15 @@ export const Login = (props) => {
     // Gửi yêu cầu đăng nhập đến API
     axios.post("http://localhost:3000/user/login", loginData)
       .then(response => {
-        // Xử lý phản hồi từ API
-        console.log(response.data);
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+        console.log("Token saved:", token);
+        alert("Đăng nhập thành công!");
       })
       .catch(error => {
         // Xử lý lỗi nếu có
         console.error(error);
+        alert("Đăng nhập thất bại");
       });
   };
 

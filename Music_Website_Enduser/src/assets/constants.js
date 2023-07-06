@@ -1,4 +1,6 @@
-import { HiOutlineHashtag, HiOutlineHome, HiMusicNote, HiOutlineUserGroup, HiOutlineUserCircle , HiOutlineUserCircle } from 'react-icons/hi';
+import { HiOutlineHashtag, HiOutlineHome, HiMusicNote, HiOutlineUserGroup , HiOutlineUserCircle } from 'react-icons/hi';
+
+const token = localStorage.getItem("token");
 
 export const genres = [
   { title: 'Pop', value: 'POP' },
@@ -22,7 +24,7 @@ export const links = [
   { name: 'Playlist', to: '/play-list', icon: HiMusicNote },
   { name: 'Top Artists', to: '/top-artists', icon: HiOutlineUserGroup },
   { name: 'Top Charts', to: '/top-charts', icon: HiOutlineHashtag },
-  { name: 'Log In', to: '/log-in', icon: HiOutlineUserCircle},
-  { name: 'Register', to: '/register', icon: HiOutlineUserCircle},
-
+  { name: token ? 'TrungKien': 'Log in', to: token ? '/TrungKien': '/log-in', icon: HiOutlineUserCircle},
+  { name: token ? 'Đăng xuất' : '', to: token ? '/log-out':'/register' , icon: HiOutlineUserCircle},
 ];
+
