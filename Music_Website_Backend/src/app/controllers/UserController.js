@@ -11,7 +11,7 @@ class userController {
         try {
             const userBody = req.body;
             const user = await accountModel.findOne({
-                email: String(userBody.username),
+                email: String(userBody.email),
             });
 
             if (!user) {
@@ -62,12 +62,13 @@ class userController {
       
           // Hash the password
           const saltRounds = 10;
-        //   const hashedPassword = await hashAsync(userBody.password, saltRounds);
+            const hashedPassword = await hashAsync(userBody.password, saltRounds);
       
           // Create a new user object with hashed password
           const newUser = new accountModel({
             email: userBody.email,
-            password: userBody.password,
+            // password: userBody.password,
+            password:hashedPassword,
             access: userBody.access,
             name: userBody.name,
             phone: userBody.phone,
